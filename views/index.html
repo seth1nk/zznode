@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ювелирные изделия</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div id="content">
+        <img class="logo" src="/images/logo.png" alt="Логотип">
+        <div id="welcome-section"></div>
+    </div>
+    <div class="button-container">
+        <a href="http://localhost:8080" class="vueapp-button">VueApp</a>
+    </div>
+
+    <script>
+        async function checkAuth() {
+            try {
+                const response = await fetch('/api/user', {
+                    credentials: 'include' // Отправляем куки с токеном
+                });
+                const welcomeSection = document.getElementById('welcome-section');
+
+                if (response.ok) {
+                    const data = await response.json();
+                    welcomeSection.innerHTML = `
+                        <h1>Добро пожаловать, ${data.username}!</h1>
+                        <div class="link-container">
+                            <a class="jewelry-link" href="/auth/logout">Выйти</a>
+                        </div>
+                    `;
+                } else {
+                    welcomeSection.innerHTML = `
+                        <h1>Добро пожаловать на сайт!</h1>
+                        <p>Чтобы войти, нажмите на кнопку ниже:</p>
+                        <div class="link-container">
+                            <a class="jewelry-link" href="/auth/login">Войти</a>
+                        </div>
+                    `;
+                }
+            } catch (err) {
+                console.error('Ошибка проверки авторизации:', err);
+                const welcomeSection = document.getElementById('welcome-section');
+                welcomeSection.innerHTML = `
+                    <h1>Добро пожаловать на сайт!</h1>
+                    <p>Чтобы войти, нажмите на кнопку ниже:</p>
+                    <div class="link-container">
+                        <a class="jewelry-link" href="/auth/login">Войти</a>
+                    </div>
+                `;
+            }
+        }
+
+        window.onload = checkAuth;
+    </script>
+    <script src="/js/layout.js"></script>
+</body>
+</html>

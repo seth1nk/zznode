@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ошибка</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div id="content">
+        <h1 id="message"></h1>
+        <h2 id="status"></h2>
+        <pre id="stack"></pre>
+    </div>
+
+    <script>
+        document.getElementById('message').textContent = "<%= message %>" || 'Произошла ошибка';
+        document.getElementById('status').textContent = "<%= errorStatus %>" || '500';
+        document.getElementById('stack').textContent = "<%= errorStack %>" || 'Подробности отсутствуют';
+    </script>
+    <script src="/js/layout.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить ювелирное изделие</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div id="content">
+        <div class="app-container">
+            <h1 class="page-title">Добавить новое ювелирное изделие</h1>
+            <form class="form-container" id="create-form" action="/add-jewelry" method="POST" enctype="multipart/form-data">
+                <div class="input-group">
+                    <label for="name">Название:</label>
+                    <input id="name" class="form-input" type="text" name="name" required>
+                </div>
+                <div class="input-group">
+                    <label for="category">Категория:</label>
+                    <input id="category" class="form-input" type="text" name="category" required>
+                </div>
+                <div class="input-group">
+                    <label for="material">Материал:</label>
+                    <input id="material" class="form-input" type="text" name="material" required>
+                </div>
+                <div class="input-group">
+                    <label for="weight">Вес (г):</label>
+                    <input id="weight" class="form-input" type="number" name="weight" step="1" required>
+                </div>
+                <div class="input-group">
+                    <label for="price">Цена (₽):</label>
+                    <input id="price" class="form-input" type="number" name="price" step="1" required>
+                </div>
+                <div class="input-group">
+                    <label for="in_stock">В наличии:</label>
+                    <input id="in_stock" class="form-checkbox" type="checkbox" name="in_stock" checked>
+                </div>
+                <div class="input-group">
+                    <label for="image">Выберите изображение:</label>
+                    <input id="image" class="form-input" type="file" name="image" accept="image/*">
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-primary" type="submit">Добавить изделие</button>
+                    <a href="/jewelry/index.html" class="btn-secondary">Вернуться к списку</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="/js/layout.js"></script>
+    <script src="/js/header.js"></script>
+    <script>
+        document.getElementById('create-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            try {
+                const response = await fetch('/add-jewelry', {
+                    method: 'POST',
+                    body: formData,
+                });
+                if (!response.ok) {
+                    throw new Error(`Ошибка сервера: ${response.status} ${response.statusText}`);
+                }
+                window.location.href = '/jewelry/index.html';
+            } catch (error) {
+                console.error('Ошибка при добавлении изделия:', error);
+                document.getElementById('content').innerHTML = `<p>Ошибка при добавлении изделия: ${error.message}</p>`;
+            }
+        });
+    </script>
+</body>
+</html>

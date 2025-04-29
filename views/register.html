@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div id="content">
+        <h1 class="page-title">Регистрация</h1>
+        <div id="error-message" class="error" style="display: none;"></div>
+        <div id="success-message" class="success" style="display: none;"></div>
+        <form class="form-container" id="register-form" action="/auth/register" method="POST">
+            <div class="form-group">
+                <label class="form-label" for="username">Имя пользователя:</label>
+                <input class="form-input" type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="email">Email:</label>
+                <input class="form-input" type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="password">Пароль:</label>
+                <input class="form-input" type="password" id="password" name="password" required>
+            </div>
+            <button class="btn-primary" type="submit">Зарегистрироваться</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('register-form').addEventListener('submit', async (e) => {
+            e.preventDefault(); // Предотвращаем перезагрузку страницы
+
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, email, password }),
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    // Успешная регистрация
+                    document.getElementById('success-message').textContent = result.message;
+                    document.getElementById('success-message').style.display = 'block';
+                    document.getElementById('error-message').style.display = 'none';
+                    // Перенаправляем на главную страницу через 2 секунды
+                    setTimeout(() => window.location.href = '/', 2000);
+                } else {
+                    // Ошибка регистрации
+                    document.getElementById('error-message').textContent = result.error;
+                    document.getElementById('error-message').style.display = 'block';
+                    document.getElementById('success-message').style.display = 'none';
+                }
+            } catch (err) {
+                console.error('Ошибка при регистрации:', err);
+                document.getElementById('error-message').textContent = 'Ошибка сервера';
+                document.getElementById('error-message').style.display = 'block';
+                document.getElementById('success-message').style.display = 'none';
+            }
+        });
+    </script>
+    <script src="/js/layout.js"></script>
+</body>
+</html>

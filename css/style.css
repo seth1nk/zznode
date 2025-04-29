@@ -1,0 +1,610 @@
+/* Основные настройки */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+body {
+    font-family: 'Roboto Mono', monospace;
+    background: linear-gradient(135deg, #1a1a1a, #333333); /* Черный градиент */
+    color: #d4af37; /* Золотой текст */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 60px;
+    padding-top: 80px; /* Отступ для фиксированной шапки */
+}
+
+/* Шапка */
+.header-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(90deg, #1a1a1a, #2a2a2a); /* Градиент от черного к темно-серому */
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    z-index: 1000;
+}
+
+.pets-link,
+.nutrition-link {
+    color: #d4af37; /* Золотой текст */
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 25px;
+    background: rgba(212, 175, 55, 0.2); /* Полупрозрачный золотой фон */
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.pets-link:hover,
+.nutrition-link:hover {
+    background: #d4af37; /* Золотой фон */
+    color: #1a1a1a; /* Черный текст */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    .header-container {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .pets-link,
+    .nutrition-link {
+        font-size: 1rem;
+        padding: 8px 15px;
+    }
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+/* Логотип */
+.logo {
+    display: block;
+    margin: 0 auto 20px auto;
+    max-width: 100px; /* Уменьшенный размер логотипа */
+    height: auto;
+}
+
+/* Контейнер приложения */
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Заголовок страницы */
+.page-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #d4af37; /* Золотой текст */
+}
+
+/* Форма */
+.form-container {
+    background: rgba(26, 26, 26, 0.3); /* Полупрозрачный черный фон */
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #d4af37; /* Золотой текст */
+}
+
+.form-input {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    outline: none;
+    background: rgba(212, 175, 55, 0.2); /* Полупрозрачный золотой фон */
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #d4af37; /* Золотой текст */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-input:focus {
+    background: rgba(212, 175, 55, 0.3); /* Чуть ярче при фокусе */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-select {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    outline: none;
+    background: rgba(212, 175, 55, 0.2); /* Полупрозрачный золотой фон */
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #d4af37; /* Золотой текст */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-select:focus {
+    background: rgba(212, 175, 55, 0.3); /* Чуть ярче при фокусе */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.form-checkbox input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #d4af37; /* Золотой цвет чекбокса */
+    cursor: pointer;
+}
+
+/* Кнопки */
+.btn-primary {
+    width: 100%;
+    padding: 10px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #1a1a1a; /* Черный текст */
+    background: #d4af37; /* Золотой фон */
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    background: #b8860b; /* Темный золотой при наведении */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-secondary {
+    width: 100%;
+    padding: 10px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #d4af37; /* Золотой текст */
+    background: rgba(212, 175, 55, 0.2); /* Полупрозрачный золотой фон */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    text-decoration: none;
+}
+
+.btn-secondary:hover {
+    background: rgba(212, 175, 55, 0.3); /* Чуть ярче при наведении */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Ссылки */
+.jewelry-link,
+.orders-link {
+    display: inline-block;
+    color: #d4af37; /* Золотой текст */
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 50px;
+    background: rgba(212, 175, 55, 0.2); /* Полупрозрачный золотой фон */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+    margin: 5px;
+}
+
+.jewelry-link:hover,
+.orders-link:hover {
+    background: rgba(212, 175, 55, 0.3); /* Чуть ярче при наведении */
+    transform: scale(1.05);
+}
+
+.link-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Кнопка VueApp */
+.vueapp-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #d4af37; /* Золотой фон */
+    color: #1a1a1a; /* Черный текст */
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.vueapp-button:hover {
+    background: #b8860b; /* Темный золотой */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Контейнер кнопки VueApp */
+.button-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+/* Таблица */
+.table-container {
+    width: 100%;
+    max-width: 1200px;
+    background: rgba(26, 26, 26, 0.3); /* Полупрозрачный черный фон */
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    margin-bottom: 20px;
+    overflow-x: auto; /* Горизонтальная прокрутка для узких экранов */
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    margin: 0 auto; /* Центрирование таблицы */
+    table-layout: auto; /* Автоматическая ширина столбцов */
+}
+
+.styled-table th,
+.styled-table td {
+    background: rgba(26, 26, 26, 0.2); /* Полупрозрачный черный фон */
+    color: #d4af37; /* Золотой текст */
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3); /* Золотая граница */
+    border-right: 1px solid rgba(212, 175, 55, 0.3);
+    white-space: nowrap; /* Запрет переноса текста */
+}
+
+.styled-table th {
+    background: rgba(26, 26, 26, 0.3); /* Полупрозрачный черный фон */
+    font-weight: bold;
+}
+
+/* Оптимизация ширины столбцов для заказов */
+.styled-table th:nth-child(1),
+.styled-table td:nth-child(1) { /* ID */
+    width: 5%;
+    min-width: 50px;
+}
+
+.styled-table th:nth-child(2),
+.styled-table td:nth-child(2) { /* Имя клиента */
+    width: 15%;
+    min-width: 120px;
+    max-width: 150px; /* Добавить максимальную ширину */
+}
+/* Добавьте этот стиль в ваш CSS файл */
+.styled-table td:nth-child(2) { /* Имя клиента */
+    white-space: normal; /* Разрешить перенос текста */
+    word-break: break-word; /* Переносить длинные слова */
+    max-width: 150px; /* Ограничить ширину для переноса */
+    text-align: left; /* Выравнивание по левому краю */
+    padding: 10px 5px; /* Уменьшить боковые отступы */
+}
+
+.styled-table th:nth-child(3),
+.styled-table td:nth-child(3) { /* Дата заказа */
+    width: 10%;
+    min-width: 100px;
+}
+
+.styled-table th:nth-child(4),
+.styled-table td:nth-child(4) { /* Сумма */
+    width: 10%;
+    min-width: 100px;
+}
+
+.styled-table th:nth-child(5),
+.styled-table td:nth-child(5) { /* Статус */
+    width: 10%;
+    min-width: 100px;
+}
+
+.styled-table th:nth-child(6),
+.styled-table td:nth-child(6) { /* Адрес доставки */
+    width: 25%;
+    min-width: 150px;
+    white-space: normal; /* Разрешить перенос для длинных адресов */
+}
+
+.styled-table th:nth-child(7),
+.styled-table td:nth-child(7) { /* Изображение */
+    width: 10%;
+    min-width: 100px;
+}
+
+.styled-table th:nth-child(8),
+.styled-table td:nth-child(8) { /* Действия */
+    width: 15%;
+    min-width: 120px; /* Гарантировать видимость кнопок */
+}
+
+.styled-table th:last-child,
+.styled-table td:last-child {
+    border-right: none;
+}
+
+.styled-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.styled-table tbody tr:hover {
+    background: rgba(212, 175, 55, 0.1); /* Полупрозрачный золотой фон при наведении */
+    cursor: pointer;
+}
+
+.no-data {
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 20px;
+    color: #d4af37;
+}
+
+.product-image {
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 8px;
+    object-fit: cover;
+    vertical-align: middle;
+}
+
+/* Статусы */
+.status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #1a1a1a; /* Черный текст */
+}
+
+.status.available {
+    background: #d4af37; /* Золотой фон */
+}
+
+.status.unavailable {
+    background: #b8860b; /* Темный золотой фон */
+}
+
+.status-в-обработке {
+    background: #d4af37; /* Золотой фон */
+}
+
+.status-отправлен {
+    background: #ffd700; /* Яркий золотой фон */
+}
+
+.status-доставлен {
+    background: #b8860b; /* Темный золотой фон */
+}
+
+/* Кнопки действий */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    color: #d4af37; /* Золотой цвет */
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.action-btn:hover {
+    transform: scale(1.2);
+}
+
+.view-icon {
+    color: #d4af37; /* Золотой */
+}
+
+.view-icon:hover {
+    color: #b8860b; /* Темный золотой */
+}
+
+.edit-icon {
+    color: #ffd700; /* Яркий золотой */
+}
+
+.edit-icon:hover {
+    color: #b8860b; /* Темный золотой */
+}
+
+.delete-icon {
+    color: #b8860b; /* Темный золотой */
+}
+
+.delete-icon:hover {
+    color: #ffd700; /* Яркий золотой */
+}
+
+/* Контейнер продукта */
+.product-image-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.product-image {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 8px;
+}
+
+.info-container {
+    flex: 1;
+    margin-left: 20px;
+}
+
+/* Пагинация */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+    padding: 20px 0;
+    z-index: 10;
+}
+
+.pagination a {
+    background: #d4af37; /* Золотой фон */
+    color: #1a1a1a; /* Черный текст */
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.pagination a.active {
+    background: #b8860b; /* Темный золотой */
+    color: #1a1a1a;
+}
+
+.pagination a:hover:not(.active) {
+    background: #b8860b; /* Темный золотой */
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.pagination .dots {
+    color: #d4af37; /* Золотой */
+    pointer-events: none;
+}
+
+/* Стили для select */
+select.form-input {
+    background: rgba(212, 175, 55, 0.2); /* Полупрозрачный золотой фон */
+    color: #d4af37; /* Золотой текст */
+}
+
+option {
+    background: #1a1a1a; /* Черный фон для опций */
+    color: #d4af37; /* Золотой текст */
+}
+
+/* Анимация появления */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .app-container {
+        padding: 15px;
+    }
+
+    .form-container {
+        padding: 15px;
+    }
+
+    .product-image {
+        max-width: 80px;
+        max-height: 80px;
+    }
+
+    .product-image-container .product-image {
+        max-width: 150px;
+        max-height: 150px;
+    }
+
+    .logo {
+        max-width: 80px; /* Еще меньший размер для мобильных устройств */
+    }
+
+    .styled-table th,
+    .styled-table td {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    .styled-table th:nth-child(6),
+    .styled-table td:nth-child(6) { /* Адрес доставки */
+        min-width: 100px;
+    }
+
+    .styled-table th:nth-child(8),
+    .styled-table td:nth-child(8) { /* Действия */
+        min-width: 100px;
+    }
+    
+}
