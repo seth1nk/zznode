@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     tableName: 'users',
-    timestamps: true, // Включаем метки времени для этой модели
+    timestamps: false, // Включаем метки времени для этой модели
     underscored: true, // Используем snake_case для createdAt и updatedAt (created_at, updated_at)
     indexes: [ // Добавляем индексы для часто запрашиваемых полей
         { unique: true, fields: ['username'] },

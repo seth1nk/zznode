@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
         cb(null, dir);
     },
     filename: function (req, file, cb) {
-        cb(null, file.originalname); // Сохраняем оригинальное имя файла
+        cb(null, Date.now() + '-' + file.originalname); // Уникальное имя файла
     },
 });
 const upload = multer({ storage });
@@ -35,6 +35,7 @@ router.get('/api/jewelry', authRequired, async (req, res) => {
             limit,
             offset,
             order: [['id', 'ASC']],
+            attributes: ['id', 'name', 'category', 'material', 'weight', 'price', 'in_stock', 'image'],
         });
 
         const totalPages = Math.ceil(count / limit);
@@ -45,10 +46,10 @@ router.get('/api/jewelry', authRequired, async (req, res) => {
             name: item.name,
             category: item.category,
             material: item.material,
-            weight: Math.floor(item.weight), // Целое число
-            price: Math.floor(item.price), // Целое число
+            weight: Math.floor(item.weight),
+            price: Math.floor(item.price),
             in_stock: item.in_stock,
-            image: item.image ? item.image.replace('/img/', '/images/') : null, // Корректировка пути
+            image: item.image ? item.image.replace('/img/', '/images/') : null,
         }));
 
         res.json({
@@ -63,10 +64,12 @@ router.get('/api/jewelry', authRequired, async (req, res) => {
     }
 });
 
-// Получить ювелирное изделие по ID (для view.html)
+// Получить ювелирное изделие по ID
 router.get('/api/view-jewelry/:id', authRequired, async (req, res) => {
     try {
-        const jewelry = await Jewelry.findByPk(req.params.id);
+        const jewelry = await Jewelry.findByPk(req.params.id, {
+            attributes: ['id', 'name', 'category', 'material', 'weight', 'price', 'in_stock', 'image'],
+        });
         if (!jewelry) {
             return res.status(404).json({ error: 'Ювелирное изделие не найдено' });
         }
@@ -76,10 +79,10 @@ router.get('/api/view-jewelry/:id', authRequired, async (req, res) => {
             name: jewelry.name,
             category: jewelry.category,
             material: jewelry.material,
-            weight: Math.floor(jewelry.weight), // Целое число
-            price: Math.floor(jewelry.price), // Целое число
+            weight: Math.floor(jewelry.weight),
+            price: Math.floor(jewelry.price),
             in_stock: jewelry.in_stock,
-            image: jewelry.image ? jewelry.image.replace('/img/', '/images/') : null, // Корректировка пути
+            image: jewelry.image ? jewelry.image.replace('/img/', '/images/') : null,
         };
         res.json(formattedJewelry);
     } catch (error) {
@@ -96,10 +99,10 @@ router.post('/api/jewelry', authRequired, async (req, res) => {
             name,
             category,
             material,
-            weight: Math.floor(weight), // Целое число
-            price: Math.floor(price), // Целое число
+            weight: Math.floor(weight),
+            price: Math.floor(price),
             in_stock,
-            image: image ? image.replace('/img/', '/images/') : null, // Корректировка пути
+            image: image ? image.replace('/img/', '/images/') : null,
         });
         // Форматирование ответа
         const formattedJewelry = {
@@ -125,15 +128,15 @@ router.post('/add-jewelry', authRequired, upload.single('image'), async (req, re
         const { name, category, material, weight, price, in_stock } = req.body;
         let image = null;
         if (req.file) {
-            image = `/images/jewelry/${req.file.filename}`; // Используем имя файла, сгенерированное multer
+            image = `/images/jewelry/${req.file.filename}`;
         }
-        const jewelry = await Jewelry.create({
+        await Jewelry.create({
             name,
             category,
             material,
-            weight: Math.floor(weight), // Целое число
-            price: Math.floor(price), // Целое число
-            in_stock: in_stock === 'on', // Преобразуем значение чекбокса
+            weight: Math.floor(weight),
+            price: Math.floor(price),
+            in_stock: in_stock === 'on',
             image,
         });
         res.redirect('/jewelry/index.html');
@@ -155,10 +158,10 @@ router.put('/api/jewelry/:id', authRequired, async (req, res) => {
             name,
             category,
             material,
-            weight: Math.floor(weight), // Целое число
-            price: Math.floor(price), // Целое число
+            weight: Math.floor(weight),
+            price: Math.floor(price),
             in_stock,
-            image: image ? image.replace('/img/', '/images/') : null, // Корректировка пути
+            image: image ? image.replace('/img/', '/images/') : null,
         });
         // Форматирование ответа
         const formattedJewelry = {
@@ -186,17 +189,17 @@ router.post('/edit-jewelry/:id', authRequired, upload.single('image'), async (re
             return res.status(404).send('Ювелирное изделие не найдено');
         }
         const { name, category, material, weight, price, in_stock } = req.body;
-        let image = jewelry.image; // Сохраняем текущее изображение по умолчанию
+        let image = jewelry.image;
         if (req.file) {
-            image = `/images/jewelry/${req.file.filename}`; // Используем имя файла, сгенерированное multer
+            image = `/images/jewelry/${req.file.filename}`;
         }
         await jewelry.update({
             name,
             category,
             material,
-            weight: Math.floor(weight), // Целое число
-            price: Math.floor(price), // Целое число
-            in_stock: in_stock === 'on', // Преобразуем значение чекбокса
+            weight: Math.floor(weight),
+            price: Math.floor(price),
+            in_stock: in_stock === 'on',
             image,
         });
         res.redirect('/jewelry/index.html');
@@ -209,18 +212,15 @@ router.post('/edit-jewelry/:id', authRequired, upload.single('image'), async (re
 // Удалить ювелирное изделие
 router.delete('/delete-jewelry/:id', authRequired, async (req, res) => {
     try {
-        const jewelryId = req.params.id;
-        const jewelry = await Jewelry.findByPk(jewelryId);
+        const jewelry = await Jewelry.findByPk(req.params.id);
         if (!jewelry) {
-            console.warn(`Ювелирное изделие с ID ${jewelryId} не найдено`);
             return res.status(404).json({ error: 'Ювелирное изделие не найдено' });
         }
         await jewelry.destroy();
-        console.log(`Ювелирное изделие с ID ${jewelryId} успешно удалено`);
         res.json({ message: 'Ювелирное изделие удалено' });
     } catch (error) {
-        console.error(`Ошибка при удалении ювелирного изделия с ID ${req.params.id}:`, error);
-        res.status(500).json({ error: `Ошибка сервера: ${error.message}` });
+        console.error('Ошибка при удалении ювелирного изделия:', error);
+        res.status(500).json({ error: 'Ошибка сервера: ' + error.message });
     }
 });
 
