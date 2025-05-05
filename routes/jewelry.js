@@ -123,42 +123,71 @@ router.post('/api/jewelry', authRequired, async (req, res) => {
 });
 
 router.post('/add-jewelry', authRequired, upload.single('image'), async (req, res) => {
+    console.log('===== REQUEST DATA =====');
+    console.log('Body:', req.body);
+    console.log('File:', req.file);
+
     try {
-        const { name, category, material, weight, price, in_stock } = req.body;
-        
         // Проверка обязательных полей
-        if (!name || !category || !material || !weight || !price) {
-            return res.status(400).send('Не все обязательные поля заполнены');
+        const requiredFields = ['name', 'category', 'material', 'weight', 'price'];
+        for (const field of requiredFields) {
+            if (!req.body[field]) {
+                throw new Error(`Missing required field: ${field}`);
+            }
         }
 
-        // Обработка checkbox (может приходить как 'on' или undefined)
+        // Парсинг данных
+        const { name, category, material, weight, price } = req.body;
         const inStock = req.body.in_stock === 'on';
-        
-        // Обработка веса и цены (преобразование в числа)
         const numericWeight = parseFloat(weight);
         const numericPrice = parseFloat(price);
-        
+
+        if (isNaN(numericWeight) || isNaN(numericPrice)) {
+            throw new Error('Weight and price must be numbers');
+        }
+
         // Обработка изображения
         let imagePath = null;
         if (req.file) {
+            if (!req.file.path) {
+                throw new Error('File upload failed');
+            }
             imagePath = `/images/jewelry/${req.file.filename}`;
+            
+            // Проверка существования файла
+            if (!fs.existsSync(req.file.path)) {
+                throw new Error('Uploaded file not found on server');
+            }
         }
 
-        // Создание записи
-        await Jewelry.create({
-            name,
-            category,
-            material,
+        // Создание записи с валидацией
+        const jewelry = await Jewelry.create({
+            name: name.trim(),
+            category: category.trim(),
+            material: material.trim(),
             weight: Math.floor(numericWeight),
             price: Math.floor(numericPrice),
             in_stock: inStock,
             image: imagePath
         });
 
+        console.log('Created jewelry:', jewelry.toJSON());
         res.redirect('/jewelry/index.html');
+
     } catch (error) {
-        console.error('Ошибка при создании ювелирного изделия:', error);
-        res.status(500).send(`Ошибка сервера: ${error.message}`);
+        console.error('ERROR DETAILS:', {
+            message: error.message,
+            stack: error.stack,
+            body: req.body,
+            file: req.file
+        });
+        
+        // Удаляем загруженный файл, если запись не создалась
+        if (req.file && req.file.path && fs.existsSync(req.file.path)) {
+            fs.unlinkSync(req.file.path);
+        }
+        
+        res.status(500).send(`Ошибка при создании изделия: ${error.message}`);
     }
 });
 
