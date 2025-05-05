@@ -11,7 +11,8 @@
     <div id="content">
         <div class="app-container">
             <h1 class="page-title">Добавить новое ювелирное изделие</h1>
-            <form class="form-container" id="create-form" action="/add-jewelry" method="POST" enctype="multipart/form-data">
+            <form class="form-container" id="create-form" method="POST" enctype="multipart/form-data">
+                <!-- Убрали action, оставили только method и enctype -->
                 <div class="input-group">
                     <label for="name">Название:</label>
                     <input id="name" class="form-input" type="text" name="name" required>
@@ -52,21 +53,34 @@
     <script>
         document.getElementById('create-form').addEventListener('submit', async (event) => {
             event.preventDefault();
+            
             const form = event.target;
             const formData = new FormData(form);
+            const submitButton = form.querySelector('button[type="submit"]');
             
             try {
+                // Блокируем кнопку на время отправки
+                submitButton.disabled = true;
+                submitButton.textContent = 'Отправка...';
+                
                 const response = await fetch('/add-jewelry', {
                     method: 'POST',
-                    body: formData,
+                    body: formData
+                    // Не нужно указывать Content-Type для FormData!
                 });
+                
                 if (!response.ok) {
-                    throw new Error(`Ошибка сервера: ${response.status} ${response.statusText}`);
+                    const errorText = await response.text();
+                    throw new Error(errorText || 'Неизвестная ошибка сервера');
                 }
+                
                 window.location.href = '/jewelry/index.html';
             } catch (error) {
                 console.error('Ошибка при добавлении изделия:', error);
-                document.getElementById('content').innerHTML = `<p>Ошибка при добавлении изделия: ${error.message}</p>`;
+                alert(`Ошибка: ${error.message}`);
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Добавить изделие';
             }
         });
     </script>
