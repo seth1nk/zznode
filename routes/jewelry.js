@@ -122,27 +122,43 @@ router.post('/api/jewelry', authRequired, async (req, res) => {
     }
 });
 
-// Создать ювелирное изделие (форма)
 router.post('/add-jewelry', authRequired, upload.single('image'), async (req, res) => {
     try {
         const { name, category, material, weight, price, in_stock } = req.body;
-        let image = null;
-        if (req.file) {
-            image = `/images/jewelry/${req.file.filename}`;
+        
+        // Проверка обязательных полей
+        if (!name || !category || !material || !weight || !price) {
+            return res.status(400).send('Не все обязательные поля заполнены');
         }
+
+        // Обработка checkbox (может приходить как 'on' или undefined)
+        const inStock = req.body.in_stock === 'on';
+        
+        // Обработка веса и цены (преобразование в числа)
+        const numericWeight = parseFloat(weight);
+        const numericPrice = parseFloat(price);
+        
+        // Обработка изображения
+        let imagePath = null;
+        if (req.file) {
+            imagePath = `/images/jewelry/${req.file.filename}`;
+        }
+
+        // Создание записи
         await Jewelry.create({
             name,
             category,
             material,
-            weight: Math.floor(weight),
-            price: Math.floor(price),
-            in_stock: in_stock === 'on',
-            image,
+            weight: Math.floor(numericWeight),
+            price: Math.floor(numericPrice),
+            in_stock: inStock,
+            image: imagePath
         });
+
         res.redirect('/jewelry/index.html');
     } catch (error) {
         console.error('Ошибка при создании ювелирного изделия:', error);
-        res.status(500).send('Ошибка сервера: ' + error.message);
+        res.status(500).send(`Ошибка сервера: ${error.message}`);
     }
 });
 
