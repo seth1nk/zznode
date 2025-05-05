@@ -12,7 +12,8 @@ module.exports = (sequelize, DataTypes) => {
         image: { type: DataTypes.STRING, allowNull: true },
         delivery_address: { type: DataTypes.STRING, allowNull: false }
     }, {
-        tableName: 'orders'
+        tableName: 'orders',
+        timestamps: false 
     });
     return Order;
   };
