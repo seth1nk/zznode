@@ -13,7 +13,8 @@ module.exports = (sequelize, DataTypes) => {
         image: { type: DataTypes.STRING, allowNull: true },
         in_stock: { type: DataTypes.BOOLEAN, defaultValue: true }
     }, {
-        tableName: 'jewelry'
+        tableName: 'jewelry',
+        timestamps: false 
     });
     return Jewelry;
   };
