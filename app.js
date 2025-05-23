@@ -6,12 +6,12 @@ const cors = require('cors');
 const { Sequelize } = require('sequelize');
 const authRouter = require('./routes/auth');
 const clientsRouter = require('./routes/clients');
-const smartwatchesRouter = require('./routes/smartwatches');
+const repairsRouter = require('./routes/repairs');
 const authRequired = require('./middleware/authRequired');
 
 const app = express();
 
-const sequelize = new Sequelize('postgresql://uwbrrzerxx05zn6dd4ha:FxrjVohfWjKljhepkR8zyTE0FpAvK1@bcyknwpphsrxdyve4pho-postgresql.services.clever-cloud.com:50013/bcyknwpphsrxdyve4pho', {
+const sequelize = new Sequelize('postgresql://ul1e6bvbtulgghqikapt:HBmabTXjQKj9cuvnVQJJMMGcnDfwqf@bok8olbwcb3wgp8da8ze-postgresql.services.clever-cloud.com:50013/bok8olbwcb3wgp8da8ze', {
     dialect: 'postgres',
     logging: console.log,
     dialectOptions: {
@@ -22,7 +22,7 @@ const sequelize = new Sequelize('postgresql://uwbrrzerxx05zn6dd4ha:FxrjVohfWjKlj
     },
 });
 
-const { User, Client, Smartwatch } = require('./models');
+const { User, Client, Repair } = require('./models');
 
 sequelize.sync({ alter: true })
     .then(() => console.log('Models synchronized with database'))
@@ -39,12 +39,12 @@ app.use(cors({
 app.use('/css', express.static(path.join(__dirname, 'css')));
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/clients', express.static(path.join(__dirname, 'views', 'clients')));
-app.use('/smartwatches', express.static(path.join(__dirname, 'views', 'smartwatches')));
+app.use('/repairs', express.static(path.join(__dirname, 'views', 'repairs')));
 app.use('/js', express.static(path.join(__dirname, 'js')));
 
 app.use('/auth', authRouter);
 app.use('/', clientsRouter);
-app.use('/', smartwatchesRouter);
+app.use('/', repairsRouter);
 
 app.get('/', authRequired, (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'index.html'));

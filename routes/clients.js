@@ -6,7 +6,6 @@ const multer = require('multer');
 const { Client } = require('../models');
 const authRequired = require('../middleware/authRequired');
 
-// Настройка multer для загрузки файлов
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         const dir = path.join(__dirname, '../images', 'clients');
@@ -14,18 +13,15 @@ const storage = multer.diskStorage({
         cb(null, dir);
     },
     filename: function (req, file, cb) {
-        // Сохраняем оригинальное имя файла
         cb(null, file.originalname);
     },
 });
 const upload = multer({ storage });
 
-// Маршрут для списка клиентов (редирект на страницу)
 router.get('/list-clients', authRequired, (req, res) => {
     res.redirect('/clients/index.html');
 });
 
-// Получить список клиентов с пагинацией
 router.get('/api/clients', authRequired, async (req, res) => {
     try {
         const page = parseInt(req.query.page) || 1;
@@ -36,21 +32,20 @@ router.get('/api/clients', authRequired, async (req, res) => {
             limit,
             offset,
             order: [['id', 'ASC']],
-            attributes: ['id', 'last_name', 'first_name', 'middle_name', 'birth_date', 'email', 'phone', 'is_subscribed', 'photo'],
+            attributes: ['id', 'first_name', 'last_name', 'phone', 'email', 'address', 'birth_date', 'notes', 'photo'],
         });
 
         const totalPages = Math.ceil(count / limit);
 
-        // Форматирование данных
         const formattedClients = rows.map(item => ({
             id: item.id,
-            last_name: item.last_name,
             first_name: item.first_name,
-            middle_name: item.middle_name,
-            birth_date: item.birth_date,
-            email: item.email,
+            last_name: item.last_name,
             phone: item.phone,
-            is_subscribed: item.is_subscribed,
+            email: item.email,
+            address: item.address,
+            birth_date: item.birth_date,
+            notes: item.notes,
             photo: item.photo ? item.photo.replace('/img/', '/images/') : null,
         }));
 
@@ -66,25 +61,23 @@ router.get('/api/clients', authRequired, async (req, res) => {
     }
 });
 
-// Получить клиента по ID
 router.get('/api/view-client/:id', authRequired, async (req, res) => {
     try {
         const client = await Client.findByPk(req.params.id, {
-            attributes: ['id', 'last_name', 'first_name', 'middle_name', 'birth_date', 'email', 'phone', 'is_subscribed', 'photo'],
+            attributes: ['id', 'first_name', 'last_name', 'phone', 'email', 'address', 'birth_date', 'notes', 'photo'],
         });
         if (!client) {
             return res.status(404).json({ error: 'Клиент не найден' });
         }
-        // Форматирование данных
         const formattedClient = {
             id: client.id,
-            last_name: client.last_name,
             first_name: client.first_name,
-            middle_name: client.middle_name,
-            birth_date: client.birth_date,
-            email: client.email,
+            last_name: client.last_name,
             phone: client.phone,
-            is_subscribed: client.is_subscribed,
+            email: client.email,
+            address: client.address,
+            birth_date: client.birth_date,
+            notes: client.notes,
             photo: client.photo ? client.photo.replace('/img/', '/images/') : null,
         };
         res.json(formattedClient);
@@ -94,30 +87,28 @@ router.get('/api/view-client/:id', authRequired, async (req, res) => {
     }
 });
 
-// Создать клиента (API)
 router.post('/api/clients', authRequired, async (req, res) => {
     try {
-        const { last_name, first_name, middle_name, birth_date, email, phone, is_subscribed, photo } = req.body;
+        const { first_name, last_name, phone, email, address, birth_date, notes, photo } = req.body;
         const client = await Client.create({
-            last_name,
             first_name,
-            middle_name,
-            birth_date,
-            email,
+            last_name,
             phone,
-            is_subscribed,
+            email,
+            address,
+            birth_date,
+            notes,
             photo: photo ? photo.replace('/img/', '/images/') : null,
         });
-        // Форматирование ответа
         const formattedClient = {
             id: client.id,
-            last_name: client.last_name,
             first_name: client.first_name,
-            middle_name: client.middle_name,
-            birth_date: client.birth_date,
-            email: client.email,
+            last_name: client.last_name,
             phone: client.phone,
-            is_subscribed: client.is_subscribed,
+            email: client.email,
+            address: client.address,
+            birth_date: client.birth_date,
+            notes: client.notes,
             photo: client.photo,
         };
         res.status(201).json(formattedClient);
@@ -127,103 +118,72 @@ router.post('/api/clients', authRequired, async (req, res) => {
     }
 });
 
-// Создать клиента (форма)
 router.post('/add-client', authRequired, upload.single('photo'), async (req, res) => {
-    console.log('===== REQUEST DATA =====');
-    console.log('Body:', req.body);
-    console.log('File:', req.file);
-
     let client;
     try {
-        // Проверка обязательных полей
-        const requiredFields = ['last_name', 'first_name', 'birth_date', 'email'];
+        const requiredFields = ['first_name', 'last_name', 'phone'];
         for (const field of requiredFields) {
             if (!req.body[field]) {
                 throw new Error(`Отсутствует обязательное поле: ${field}`);
             }
         }
 
-        // Парсинг данных
-        const { last_name, first_name, middle_name, birth_date, email, phone, is_subscribed } = req.body;
-        const isSubscribed = is_subscribed === 'on';
-
-        // Создание записи в базе данных
+        const { first_name, last_name, phone, email, address, birth_date, notes } = req.body;
         client = await Client.create({
-            last_name: last_name.trim(),
             first_name: first_name.trim(),
-            middle_name: middle_name ? middle_name.trim() : null,
-            birth_date,
-            email: email.trim(),
-            phone: phone ? phone.trim() : null,
-            is_subscribed: isSubscribed,
-            photo: null // Временно устанавливаем null
+            last_name: last_name.trim(),
+            phone: phone.trim(),
+            email: email ? email.trim() : null,
+            address: address ? address.trim() : null,
+            birth_date: birth_date || null,
+            notes: notes ? notes.trim() : null,
+            photo: null
         });
 
-        // Обработка изображения
         let photoPath = null;
         if (req.file) {
-            if (!req.file.path) {
-                throw new Error('Не удалось загрузить файл');
-            }
-            // Путь к файлу уже содержит оригинальное имя (file.originalname)
             const newFilePath = path.join(__dirname, '../images', 'clients', req.file.originalname);
-
-            // Проверяем, существует ли файл
             if (!fs.existsSync(newFilePath)) {
                 throw new Error('Не удалось сохранить файл');
             }
-
-            // Формируем путь для базы данных
             photoPath = `/images/clients/${req.file.originalname}`;
             await client.update({ photo: photoPath });
         }
 
-        console.log('Создан клиент:', client.toJSON());
         res.redirect('/clients/index.html');
-
     } catch (error) {
-        console.error('ПОДРОБНОСТИ ОШИБКИ:', {
-            message: error.message,
-            stack: error.stack,
-            body: req.body,
-            file: req.file
-        });
-        // Удаляем запись при ошибке, если она была создана
-        if (client) {
-            await client.destroy();
-        }
+        console.error('Ошибка при создании клиента:', error);
+        if (client) await client.destroy();
         res.status(500).send(`Ошибка при создании клиента: ${error.message}`);
     }
 });
 
-// Обновить клиента (API)
 router.put('/api/clients/:id', authRequired, async (req, res) => {
     try {
         const client = await Client.findByPk(req.params.id);
         if (!client) {
             return res.status(404).json({ error: 'Клиент не найден' });
         }
-        const { last_name, first_name, middle_name, birth_date, email, phone, is_subscribed, photo } = req.body;
+        const { first_name, last_name, phone, email, address, birth_date, notes, photo } = req.body;
         await client.update({
-            last_name,
             first_name,
-            middle_name,
-            birth_date,
-            email,
+            last_name,
             phone,
-            is_subscribed,
+            email,
+            address,
+            birth_date,
+            notes,
             photo: photo ? photo.replace('/img/', '/images/') : null,
         });
-        // Форматирование ответа
         const formattedClient = {
             id: client.id,
-            last_name: client.last_name,
             first_name: client.first_name,
-            middle_name: client.middle_name,
-            birth_date: client.birth_date,
-            email: client.email,
+            last_name: client.last_name,
             phone: client.phone,
-            is_subscribed: client.is_subscribed,
+            email: client.email,
+            address: client.address,
+            birth_date: client.birth_date,
+            notes: client.notes,
             photo: client.photo,
         };
         res.json(formattedClient);
@@ -233,17 +193,15 @@ router.put('/api/clients/:id', authRequired, async (req, res) => {
     }
 });
 
-// Обновить клиента (форма)
 router.post('/edit-client/:id', authRequired, upload.single('photo'), async (req, res) => {
     try {
         const client = await Client.findByPk(req.params.id);
         if (!client) {
             return res.status(404).send('Клиент не найден');
         }
-        const { last_name, first_name, middle_name, birth_date, email, phone, is_subscribed } = req.body;
+        const { first_name, last_name, phone, email, address, birth_date, notes } = req.body;
         let photoPath = client.photo;
         if (req.file) {
-            // Новый файл уже сохранён с оригинальным именем
             const newFilePath = path.join(__dirname, '../images', 'clients', req.file.originalname);
             if (!fs.existsSync(newFilePath)) {
                 throw new Error('Не удалось сохранить файл');
@@ -251,13 +209,13 @@ router.post('/edit-client/:id', authRequired, upload.single('photo'), async (req
             photoPath = `/images/clients/${req.file.originalname}`;
         }
         await client.update({
-            last_name: last_name.trim(),
             first_name: first_name.trim(),
-            middle_name: middle_name ? middle_name.trim() : null,
-            birth_date,
-            email: email.trim(),
-            phone: phone ? phone.trim() : null,
-            is_subscribed: is_subscribed === 'on',
+            last_name: last_name.trim(),
+            phone: phone.trim(),
+            email: email ? email.trim() : null,
+            address: address ? address.trim() : null,
+            birth_date: birth_date || null,
+            notes: notes ? notes.trim() : null,
             photo: photoPath,
         });
         res.redirect('/clients/index.html');
@@ -267,16 +225,14 @@ router.post('/edit-client/:id', authRequired, upload.single('photo'), async (req
     }
 });
 
-// Удалить клиента
 router.delete('/delete-client/:id', authRequired, async (req, res) => {
     try {
         const client = await Client.findByPk(req.params.id);
         if (!client) {
             return res.status(404).json({ error: 'Клиент не найден' });
         }
-        // Связанный файл не удаляем, так как он может использоваться другими записями
         await client.destroy();
-        res.json({ message: 'Клиент удалён' });
+        res.json({ message: 'Клиент удален' });
     } catch (error) {
         console.error('Ошибка при удалении клиента:', error);
         res.status(500).json({ error: 'Ошибка сервера: ' + error.message });

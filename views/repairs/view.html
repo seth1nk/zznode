@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Просмотр ремонта</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div id="content">
+        <div class="app-container">
+            <h1 class="page-title">Просмотр ремонта</h1>
+            <div class="container">
+                <div class="product-info">
+                    <div class="product-image-container" id="product-image"></div>
+                    <div class="info-container">
+                        <p><strong>Тип устройства:</strong> <span id="device_type"></span></p>
+                        <p><strong>Бренд:</strong> <span id="device_brand"></span></p>
+                        <p><strong>Модель:</strong> <span id="device_model"></span></p>
+                        <p><strong>Описание проблемы:</strong> <span id="issue_description"></span></p>
+                        <p><strong>Стоимость ремонта:</strong> <span id="repair_cost"></span></p>
+                        <p><strong>Статус:</strong> <span id="status"></span></p>
+                        <p><strong>Дата:</strong> <span id="date"></span></p>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <a href="/repairs/index.html" class="btn-secondary">Вернуться к списку</a>
+                    <a id="edit-link" class="btn-primary">Редактировать</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/layout.js"></script>
+    <script src="/js/header.js"></script>
+    <script>
+        async function loadRepairData() {
+            try {
+                const urlParams = new URLSearchParams(window.location.search);
+                const repairId = urlParams.get('id');
+                if (!repairId) {
+                    throw new Error('ID ремонта не указан');
+                }
+                const response = await fetch(`/api/view-repair/${repairId}`);
+                if (!response.ok) {
+                    throw new Error(`Ошибка сервера: ${response.status} ${response.statusText}`);
+                }
+                const repair = await response.json();
+                document.getElementById('product-image').innerHTML = repair.photo ? `<img class="product-image" src="${repair.photo.replace('/img/', '/images/')}" alt="Repair Photo">` : 'Нет изображения';
+                document.getElementById('device_type').textContent = repair.device_type || 'N/A';
+                document.getElementById('device_brand').textContent = repair.device_brand || 'N/A';
+                document.getElementById('device_model').textContent = repair.device_model || 'N/A';
+                document.getElementById('issue_description').textContent = repair.issue_description || 'N/A';
+                document.getElementById('repair_cost').textContent = repair.repair_cost || 'N/A';
+                document.getElementById('status').textContent = repair.status || 'N/A';
+                document.getElementById('date').textContent = repair.date || 'N/A';
+                document.getElementById('edit-link').href = `/repairs/edit.html?id=${repair.id}`;
+            } catch (error) {
+                console.error('Ошибка загрузки данных:', error);
+                document.getElementById('content').innerHTML = `<p>Ошибка загрузки данных: ${error.message}</p>`;
+            }
+        }
+        window.onload = loadRepairData;
+    </script>
+</body>
+</html>

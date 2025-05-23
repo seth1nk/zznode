@@ -18,9 +18,9 @@ html {
 }
 
 body {
-    font-family: 'Roboto Mono', monospace;
-    background: linear-gradient(135deg, #e0c3fc, #8ec5fc); /* Светлый градиент */
-    color: #ffffff; /* Белый текст */
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #1a1a1a, #2c3e50); /* Темный градиент для техно-стиля */
+    color: #e0e0e0; /* Светло-серый текст */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -36,9 +36,8 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    background: radial-gradient(circle at center, #ff6b6b, #4b0082); /* Яркий градиент */
-    backdrop-filter: blur(5px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(90deg, #2c3e50, #3498db); /* Синий техно-градиент */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     padding: 15px 20px;
     display: flex;
     justify-content: center;
@@ -49,20 +48,20 @@ body {
 
 .pets-link,
 .nutrition-link {
-    color: #ffffff; /* Белый текст */
+    color: #e0e0e0; /* Светло-серый текст */
     font-size: 1.2rem;
-    font-weight: bold;
+    font-weight: 500;
     text-transform: uppercase;
     padding: 10px 20px;
-    border-radius: 25px;
-    background: rgba(255, 255, 255, 0.2); /* Полупрозрачный белый фон */
+    border-radius: 8px;
+    background: rgba(52, 152, 219, 0.2); /* Полупрозрачный синий фон */
     transition: all 0.3s ease;
     text-decoration: none;
 }
 
 .pets-link:hover,
 .nutrition-link:hover {
-    background: rgba(255, 255, 255, 0.3); /* Чуть ярче при наведении */
+    background: rgba(52, 152, 219, 0.4); /* Ярче при наведении */
     color: #ffffff;
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
@@ -112,17 +111,16 @@ button {
 .page-title {
     text-align: center;
     font-size: 2rem;
-    font-weight: bold;
+    font-weight: 600;
     margin-bottom: 20px;
-    color: #ffffff; /* Белый текст */
+    color: #ffffff; /* Белый текст для контраста */
 }
 
 /* Форма */
 .form-container {
-    background: rgba(26, 32, 44, 0.95); /* Тёмный прозрачный фон */
-    backdrop-filter: blur(10px);
+    background: rgba(44, 62, 80, 0.95); /* Темно-синий прозрачный фон */
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     padding: 20px;
     width: 100%;
     max-width: 600px;
@@ -136,8 +134,8 @@ button {
 .form-label {
     display: block;
     margin-bottom: 5px;
-    font-weight: bold;
-    color: #ffffff; /* Белый текст */
+    font-weight: 500;
+    color: #e0e0e0; /* Светло-серый текст */
 }
 
 .form-input {
@@ -145,8 +143,7 @@ button {
     padding: 15px;
     border: none;
     outline: none;
-    background: rgba(255, 255, 255, 0.2); /* Полупрозрачный белый фон */
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.1); /* Полупрозрачный серый фон */
     border-radius: 8px;
     font-size: 1rem;
     color: #ffffff; /* Белый текст */
@@ -154,8 +151,8 @@ button {
 }
 
 .form-input:focus {
-    background: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .form-select {
@@ -163,8 +160,7 @@ button {
     padding: 15px;
     border: none;
     outline: none;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     font-size: 1rem;
     color: #ffffff;
@@ -172,8 +168,8 @@ button {
 }
 
 .form-select:focus {
-    background: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .form-checkbox {
@@ -186,7 +182,7 @@ button {
 .form-checkbox input[type="checkbox"] {
     width: 20px;
     height: 20px;
-    accent-color: #ff6b6b; /* Яркий цвет чекбокса */
+    accent-color: #e67e22; /* Оранжевый цвет чекбокса */
     cursor: pointer;
 }
 
@@ -194,51 +190,51 @@ button {
 .btn-primary {
     width: 100%;
     padding: 10px;
-    border-radius: 50px;
+    border-radius: 8px;
     font-size: 1rem;
-    font-weight: bold;
+    font-weight: 600;
     color: #ffffff;
-    background: #ff6b6b; /* Яркий цвет кнопки */
+    background: #e67e22; /* Оранжевый цвет кнопки */
     transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     text-decoration: none;
 }
 
 .btn-primary:hover {
     transform: translateY(-3px);
-    background: #4b0082; /* Тёмный градиент при наведении */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    background: #3498db; /* Синий при наведении */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
 }
 
 .btn-secondary {
     width: 100%;
     padding: 10px;
-    border-radius: 50px;
+    border-radius: 8px;
     font-size: 1rem;
-    font-weight: bold;
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.2);
+    font-weight: 600;
+    color: #e0e0e0;
+    background: rgba(255, 255, 255, 0.1);
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     text-align: center;
     text-decoration: none;
 }
 
 .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
 }
 
 /* Ссылки */
 .jewelry-link,
 .orders-link {
     display: inline-block;
-    color: #ffffff;
+    color: #e0e0e0;
     font-size: 1.2rem;
-    font-weight: bold;
+    font-weight: 500;
     padding: 10px 20px;
-    border-radius: 50px;
-    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
     transition: background-color 0.3s ease, transform 0.3s ease;
     text-decoration: none;
     margin: 5px;
@@ -246,7 +242,7 @@ button {
 
 .jewelry-link:hover,
 .orders-link:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.2);
     transform: scale(1.05);
 }
 
@@ -259,20 +255,20 @@ button {
 .vueapp-button {
     display: inline-block;
     padding: 10px 20px;
-    background: #ff6b6b;
+    background: #e67e22;
     color: #ffffff;
     text-decoration: none;
     border-radius: 8px;
-    font-weight: bold;
+    font-weight: 600;
     text-transform: uppercase;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
 .vueapp-button:hover {
-    background: #4b0082;
+    background: #3498db;
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
 }
 
 /* Контейнер кнопки VueApp */
@@ -288,13 +284,12 @@ button {
 .table-container {
     width: 100%;
     max-width: 1200px;
-    background: rgba(26, 32, 44, 0.95); /* Тёмный прозрачный фон */
-    backdrop-filter: blur(10px);
+    background: rgba(44, 62, 80, 0.95); /* Темно-синий прозрачный фон */
     border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     padding: 20px;
     margin-bottom: 20px;
-    overflow-x: hidden; /* Убрать горизонтальную прокрутку */
+    overflow-x: hidden;
 }
 
 .styled-table {
@@ -304,25 +299,25 @@ button {
     border-radius: 16px;
     overflow: hidden;
     margin: 0 auto;
-    table-layout: fixed; /* Фиксированная ширина столбцов */
+    table-layout: fixed;
 }
 
 .styled-table th,
 .styled-table td {
-    background: rgba(26, 32, 44, 0.95);
-    color: #ffffff;
+    background: rgba(44, 62, 80, 0.95);
+    color: #e0e0e0;
     padding: 10px;
     text-align: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    border-right: 1px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .styled-table th {
-    background: rgba(255, 107, 107, 0.7); /* Яркий фон заголовков */
-    font-weight: bold;
+    background: rgba(52, 152, 219, 0.7); /* Синий фон заголовков */
+    font-weight: 600;
 }
 
 .styled-table th:last-child,
@@ -335,7 +330,7 @@ button {
 }
 
 .styled-table tbody tr:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
     cursor: pointer;
 }
 
@@ -343,7 +338,7 @@ button {
     text-align: center;
     font-size: 1.2rem;
     padding: 20px;
-    color: #ffffff;
+    color: #e0e0e0;
 }
 
 /* Настройка ширины столбцов для таблицы клиентов */
@@ -354,7 +349,7 @@ button {
 }
 
 .clients-table th:nth-child(2),
-.clients-table td:nth-child(2) { /* Фамилия */
+.clients-table td:nth-child(2) { /* Имя */
     width: 12%;
     min-width: 100px;
     white-space: normal;
@@ -362,7 +357,7 @@ button {
 }
 
 .clients-table th:nth-child(3),
-.clients-table td:nth-child(3) { /* Имя */
+.clients-table td:nth-child(3) { /* Фамилия */
     width: 12%;
     min-width: 100px;
     white-space: normal;
@@ -370,7 +365,7 @@ button {
 }
 
 .clients-table th:nth-child(4),
-.clients-table td:nth-child(4) { /* Отчество */
+.clients-table td:nth-child(4) { /* Телефон */
     width: 12%;
     min-width: 100px;
     white-space: normal;
@@ -378,13 +373,15 @@ button {
 }
 
 .clients-table th:nth-child(5),
-.clients-table td:nth-child(5) { /* Дата рождения */
-    width: 10%;
-    min-width: 100px;
+.clients-table td:nth-child(5) { /* Email */
+    width: 15%;
+    min-width: 120px;
+    white-space: normal;
+    word-break: break-word;
 }
 
 .clients-table th:nth-child(6),
-.clients-table td:nth-child(6) { /* Email */
+.clients-table td:nth-child(6) { /* Адрес */
     width: 15%;
     min-width: 120px;
     white-space: normal;
@@ -392,17 +389,17 @@ button {
 }
 
 .clients-table th:nth-child(7),
-.clients-table td:nth-child(7) { /* Телефон */
-    width: 12%;
+.clients-table td:nth-child(7) { /* Дата рождения */
+    width: 10%;
     min-width: 100px;
-    white-space: normal;
-    word-break: break-word;
 }
 
 .clients-table th:nth-child(8),
-.clients-table td:nth-child(8) { /* Подписка */
-    width: 8%;
-    min-width: 80px;
+.clients-table td:nth-child(8) { /* Заметки */
+    width: 15%;
+    min-width: 120px;
+    white-space: normal;
+    word-break: break-word;
 }
 
 .clients-table th:nth-child(9),
@@ -417,83 +414,83 @@ button {
     min-width: 100px;
 }
 
-/* Настройка ширины столбцов для таблицы смарт-часов */
-.smartwatches-table th:nth-child(1),
-.smartwatches-table td:nth-child(1) { /* ID */
+/* Настройка ширины столбцов для таблицы ремонтов */
+.repairs-table th:nth-child(1),
+.repairs-table td:nth-child(1) { /* ID */
     width: 5%;
     min-width: 50px;
 }
 
-.smartwatches-table th:nth-child(2),
-.smartwatches-table td:nth-child(2) { /* Бренд */
+.repairs-table th:nth-child(2),
+.repairs-table td:nth-child(2) { /* Тип устройства */
     width: 10%;
     min-width: 80px;
     white-space: normal;
     word-break: break-word;
 }
 
-.smartwatches-table th:nth-child(3),
-.smartwatches-table td:nth-child(3) { /* Модель */
+.repairs-table th:nth-child(3),
+.repairs-table td:nth-child(3) { /* Бренд */
+    width: 10%;
+    min-width: 80px;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.repairs-table th:nth-child(4),
+.repairs-table td:nth-child(4) { /* Модель */
     width: 15%;
     min-width: 120px;
     white-space: normal;
     word-break: break-word;
 }
 
-.smartwatches-table th:nth-child(4),
-.smartwatches-table td:nth-child(4) { /* Цвет */
-    width: 10%;
-    min-width: 80px;
+.repairs-table th:nth-child(5),
+.repairs-table td:nth-child(5) { /* Описание проблемы */
+    width: 20%;
+    min-width: 150px;
     white-space: normal;
     word-break: break-word;
 }
 
-.smartwatches-table th:nth-child(5),
-.smartwatches-table td:nth-child(5) { /* Тип дисплея */
-    width: 10%;
-    min-width: 80px;
-    white-space: normal;
-    word-break: break-word;
-}
-
-.smartwatches-table th:nth-child(6),
-.smartwatches-table td:nth-child(6) { /* Время работы батареи */
+.repairs-table th:nth-child(6),
+.repairs-table td:nth-child(6) { /* Стоимость ремонта */
     width: 10%;
     min-width: 80px;
 }
 
-.smartwatches-table th:nth-child(7),
-.smartwatches-table td:nth-child(7) { /* Цена */
+.repairs-table th:nth-child(7),
+.repairs-table td:nth-child(7) { /* Статус */
     width: 10%;
     min-width: 80px;
 }
 
-.smartwatches-table th:nth-child(8),
-.smartwatches-table td:nth-child(8) { /* В наличии */
+.repairs-table th:nth-child(8),
+.repairs-table td:nth-child(8) { /* Дата */
+    width: 10%;
+    min-width: 80px;
+}
+
+.repairs-table th:nth-child(9),
+.repairs-table td:nth-child(9) { /* Фото */
     width: 8%;
     min-width: 80px;
 }
 
-.smartwatches-table th:nth-child(9),
-.smartwatches-table td:nth-child(9) { /* Фото */
-    width: 8%;
-    min-width: 80px;
-}
-
-.smartwatches-table th:nth-child(10),
-.smartwatches-table td:nth-child(10) { /* Действия */
+.repairs-table th:nth-child(10),
+.repairs-table td:nth-child(10) { /* Действия */
     width: 12%;
     min-width: 100px;
 }
 
 .product-image {
-    max-width: 60px; /* Уменьшенный размер изображения */
+    max-width: 60px;
     max-height: 60px;
     border-radius: 8px;
     object-fit: cover;
     vertical-align: middle;
-    border: 2px solid #ffffff; /* Белая граница */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 2px solid #3498db; /* Синяя граница */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 /* Статусы */
@@ -501,16 +498,16 @@ button {
     display: inline-block;
     padding: 5px 10px;
     border-radius: 5px;
-    font-weight: bold;
+    font-weight: 600;
     color: #ffffff;
 }
 
 .status.available {
-    background: #ff6b6b; /* Яркий цвет */
+    background: #e67e22; /* Оранжевый для активных статусов */
 }
 
 .status.unavailable {
-    background: #4b0082; /* Тёмный цвет */
+    background: #7f8c8d; /* Серый для неактивных статусов */
 }
 
 /* Кнопки действий */
@@ -523,7 +520,7 @@ button {
 .action-btn {
     background: none;
     border: none;
-    color: #ffffff;
+    color: #e0e0e0;
     font-size: 1rem;
     cursor: pointer;
     transition: color 0.3s ease, transform 0.3s ease;
@@ -534,27 +531,27 @@ button {
 }
 
 .view-icon {
-    color: #ffffff;
+    color: #e0e0e0;
 }
 
 .view-icon:hover {
-    color: #ff6b6b;
+    color: #3498db;
 }
 
 .edit-icon {
-    color: #ffffff;
+    color: #e0e0e0;
 }
 
 .edit-icon:hover {
-    color: #ff6b6b;
+    color: #3498db;
 }
 
 .delete-icon {
-    color: #ffffff;
+    color: #e0e0e0;
 }
 
 .delete-icon:hover {
-    color: #ff6b6b;
+    color: #e67e22;
 }
 
 /* Контейнер продукта */
@@ -565,7 +562,7 @@ button {
 }
 
 .product-image-container .product-image {
-    max-width: 150px; /* Уменьшенный размер для просмотра */
+    max-width: 150px;
     max-height: 150px;
 }
 
@@ -581,40 +578,40 @@ button {
 }
 
 .pagination a {
-    background: #ff6b6b;
+    background: #e67e22;
     color: #ffffff;
-    font-weight: bold;
+    font-weight: 600;
     padding: 10px 20px;
-    border-radius: 50px;
+    border-radius: 8px;
     text-decoration: none;
     transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .pagination a.active {
-    background: #4b0082;
+    background: #3498db;
     color: #ffffff;
 }
 
 .pagination a:hover:not(.active) {
-    background: #4b0082;
+    background: #3498db;
     transform: scale(1.05);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
 }
 
 .pagination .dots {
-    color: #ffffff;
+    color: #e0e0e0;
     pointer-events: none;
 }
 
 /* Стили для select */
 select.form-input {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
     color: #ffffff;
 }
 
 option {
-    background: #4b0082;
+    background: #2c3e50;
     color: #ffffff;
 }
 
@@ -645,7 +642,7 @@ option {
     }
 
     .product-image {
-        max-width: 40px; /* Ещё меньше для мобильных */
+        max-width: 40px;
         max-height: 40px;
     }
 
@@ -666,9 +663,9 @@ option {
 
     .clients-table th,
     .clients-table td,
-    .smartwatches-table th,
-    .smartwatches-table td {
-        min-width: 60px; /* Уменьшенная минимальная ширина */
+    .repairs-table th,
+    .repairs-table td {
+        min-width: 60px;
     }
 }
 

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактировать ремонт</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div id="content">
+        <div class="app-container">
+            <h1 class="page-title">Редактировать ремонт</h1>
+            <form class="form-container" id="edit-form" method="POST" enctype="multipart/form-data">
+                <div class="input-group">
+                    <label for="device_type">Тип устройства:</label>
+                    <input id="device_type" class="form-input" type="text" name="device_type" required>
+                </div>
+                <div class="input-group">
+                    <label for="device_brand">Бренд:</label>
+                    <input id="device_brand" class="form-input" type="text" name="device_brand" required>
+                </div>
+                <div class="input-group">
+                    <label for="device_model">Модель:</label>
+                    <input id="device_model" class="form-input" type="text" name="device_model" required>
+                </div>
+                <div class="input-group">
+                    <label for="issue_description">Описание проблемы:</label>
+                    <textarea id="issue_description" class="form-input" name="issue_description" required></textarea>
+                </div>
+                <div class="input-group">
+                    <label for="repair_cost">Стоимость ремонта:</label>
+                    <input id="repair_cost" class="form-input" type="number" step="0.01" name="repair_cost" required>
+                </div>
+                <div class="input-group">
+                    <label for="status">Статус:</label>
+                    <input id="status" class="form-input" type="text" name="status" required>
+                </div>
+                <div class="input-group">
+                    <label for="date">Дата:</label>
+                    <input id="date" class="form-input" type="date" name="date">
+                </div>
+                <div class="input-group">
+                    <label for="photo">Фото:</label>
+                    <input id="photo" class="form-input" type="file" name="photo" accept="image/*">
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-primary" type="submit">Сохранить изменения</button>
+                    <a href="/repairs/index.html" class="btn-secondary">Вернуться к списку</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="/js/layout.js"></script>
+    <script src="/js/header.js"></script>
+    <script>
+        async function loadRepairData() {
+            try {
+                const urlParams = new URLSearchParams(window.location.search);
+                const repairId = urlParams.get('id');
+                if (!repairId) {
+                    throw new Error('ID ремонта не указан');
+                }
+                document.getElementById('edit-form').action = `/edit-repair/${repairId}`;
+                const response = await fetch(`/api/view-repair/${repairId}`);
+                if (!response.ok) {
+                    throw new Error(`Ошибка сервера: ${response.status} ${response.statusText}`);
+                }
+                const repair = await response.json();
+                document.getElementById('device_type').value = repair.device_type || '';
+                document.getElementById('device_brand').value = repair.device_brand || '';
+                document.getElementById('device_model').value = repair.device_model || '';
+                document.getElementById('issue_description').value = repair.issue_description || '';
+                document.getElementById('repair_cost').value = repair.repair_cost || '';
+                document.getElementById('status').value = repair.status || '';
+                document.getElementById('date').value = repair.date || '';
+            } catch (error) {
+                console.error('Ошибка загрузки данных:', error);
+                document.getElementById('content').innerHTML = `<p>Ошибка загрузки данных: ${error.message}</p>`;
+            }
+        }
+        window.onload = loadRepairData;
+    </script>
+</body>
+</html>

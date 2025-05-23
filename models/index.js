@@ -1,6 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize');
 
-const sequelize = new Sequelize('postgresql://uwbrrzerxx05zn6dd4ha:FxrjVohfWjKljhepkR8zyTE0FpAvK1@bcyknwpphsrxdyve4pho-postgresql.services.clever-cloud.com:50013/bcyknwpphsrxdyve4pho', {
+const sequelize = new Sequelize('postgresql://ul1e6bvbtulgghqikapt:HBmabTXjQKj9cuvnVQJJMMGcnDfwqf@bok8olbwcb3wgp8da8ze-postgresql.services.clever-cloud.com:50013/bok8olbwcb3wgp8da8ze', {
     dialect: 'postgres',
     logging: false,
     dialectOptions: {
@@ -16,8 +16,8 @@ const sequelize = new Sequelize('postgresql://uwbrrzerxx05zn6dd4ha:FxrjVohfWjKlj
 });
 
 const User = require('./User')(sequelize, DataTypes);
-const Client = require('./Clients')(sequelize, DataTypes);
-const Smartwatch = require('./Smartwatches')(sequelize, DataTypes);
+const Client = require('./Client')(sequelize, DataTypes);
+const Repair = require('./Repair')(sequelize, DataTypes);
 
 sequelize.sync({ alter: true })
     .then(() => console.log('Models synchronized with database'))
@@ -27,5 +27,5 @@ module.exports = {
     sequelize,
     User,
     Client,
-    Smartwatch
+    Repair
 };

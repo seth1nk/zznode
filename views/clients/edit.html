@@ -13,32 +13,32 @@
             <h1 class="page-title">Редактировать клиента</h1>
             <form class="form-container" id="edit-form" method="POST" enctype="multipart/form-data">
                 <div class="input-group">
-                    <label for="last_name">Фамилия:</label>
-                    <input id="last_name" class="form-input" type="text" name="last_name" required>
-                </div>
-                <div class="input-group">
                     <label for="first_name">Имя:</label>
                     <input id="first_name" class="form-input" type="text" name="first_name" required>
                 </div>
                 <div class="input-group">
-                    <label for="middle_name">Отчество:</label>
-                    <input id="middle_name" class="form-input" type="text" name="middle_name">
-                </div>
-                <div class="input-group">
-                    <label for="birth_date">Дата рождения:</label>
-                    <input id="birth_date" class="form-input" type="date" name="birth_date" required>
-                </div>
-                <div class="input-group">
-                    <label for="email">Email:</label>
-                    <input id="email" class="form-input" type="email" name="email" required>
+                    <label for="last_name">Фамилия:</label>
+                    <input id="last_name" class="form-input" type="text" name="last_name" required>
                 </div>
                 <div class="input-group">
                     <label for="phone">Телефон:</label>
-                    <input id="phone" class="form-input" type="text" name="phone">
+                    <input id="phone" class="form-input" type="text" name="phone" required>
                 </div>
                 <div class="input-group">
-                    <label for="is_subscribed">Подписка:</label>
-                    <input id="is_subscribed" class="form-checkbox" type="checkbox" name="is_subscribed">
+                    <label for="email">Email:</label>
+                    <input id="email" class="form-input" type="email" name="email">
+                </div>
+                <div class="input-group">
+                    <label for="address">Адрес:</label>
+                    <input id="address" class="form-input" type="text" name="address">
+                </div>
+                <div class="input-group">
+                    <label for="birth_date">Дата рождения:</label>
+                    <input id="birth_date" class="form-input" type="date" name="birth_date">
+                </div>
+                <div class="input-group">
+                    <label for="notes">Заметки:</label>
+                    <textarea id="notes" class="form-input" name="notes"></textarea>
                 </div>
                 <div class="input-group">
                     <label for="photo">Фото:</label>
@@ -67,13 +67,13 @@
                     throw new Error(`Ошибка сервера: ${response.status} ${response.statusText}`);
                 }
                 const client = await response.json();
-                document.getElementById('last_name').value = client.last_name || '';
                 document.getElementById('first_name').value = client.first_name || '';
-                document.getElementById('middle_name').value = client.middle_name || '';
-                document.getElementById('birth_date').value = client.birth_date || '';
-                document.getElementById('email').value = client.email || '';
+                document.getElementById('last_name').value = client.last_name || '';
                 document.getElementById('phone').value = client.phone || '';
-                document.getElementById('is_subscribed').checked = client.is_subscribed || false;
+                document.getElementById('email').value = client.email || '';
+                document.getElementById('address').value = client.address || '';
+                document.getElementById('birth_date').value = client.birth_date || '';
+                document.getElementById('notes').value = client.notes || '';
             } catch (error) {
                 console.error('Ошибка загрузки данных:', error);
                 document.getElementById('content').innerHTML = `<p>Ошибка загрузки данных: ${error.message}</p>`;
