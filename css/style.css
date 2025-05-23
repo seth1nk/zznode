@@ -19,8 +19,8 @@ html {
 
 body {
     font-family: 'Roboto Mono', monospace;
-    background: linear-gradient(135deg, #1a1a1a, #333333); /* Черный градиент */
-    color: #d4af37; /* Золотой текст */
+    background: linear-gradient(135deg, #e0c3fc, #8ec5fc); /* Светлый градиент */
+    color: #ffffff; /* Белый текст */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -36,9 +36,9 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    background: linear-gradient(90deg, #1a1a1a, #2a2a2a); /* Градиент от черного к темно-серому */
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    background: radial-gradient(circle at center, #ff6b6b, #4b0082); /* Яркий градиент */
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     padding: 15px 20px;
     display: flex;
     justify-content: center;
@@ -49,21 +49,21 @@ body {
 
 .pets-link,
 .nutrition-link {
-    color: #d4af37; /* Золотой текст */
+    color: #ffffff; /* Белый текст */
     font-size: 1.2rem;
     font-weight: bold;
     text-transform: uppercase;
     padding: 10px 20px;
     border-radius: 25px;
-    background: rgba(212, 175, 55, 0.2); /* Полупрозрачный золотой фон */
+    background: rgba(255, 255, 255, 0.2); /* Полупрозрачный белый фон */
     transition: all 0.3s ease;
     text-decoration: none;
 }
 
 .pets-link:hover,
 .nutrition-link:hover {
-    background: #d4af37; /* Золотой фон */
-    color: #1a1a1a; /* Черный текст */
+    background: rgba(255, 255, 255, 0.3); /* Чуть ярче при наведении */
+    color: #ffffff;
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
@@ -97,7 +97,7 @@ button {
 .logo {
     display: block;
     margin: 0 auto 20px auto;
-    max-width: 100px; /* Уменьшенный размер логотипа */
+    max-width: 100px;
     height: auto;
 }
 
@@ -114,12 +114,12 @@ button {
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 20px;
-    color: #d4af37; /* Золотой текст */
+    color: #ffffff; /* Белый текст */
 }
 
 /* Форма */
 .form-container {
-    background: rgba(26, 26, 26, 0.3); /* Полупрозрачный черный фон */
+    background: rgba(26, 32, 44, 0.95); /* Тёмный прозрачный фон */
     backdrop-filter: blur(10px);
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -137,7 +137,7 @@ button {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    color: #d4af37; /* Золотой текст */
+    color: #ffffff; /* Белый текст */
 }
 
 .form-input {
@@ -145,16 +145,16 @@ button {
     padding: 15px;
     border: none;
     outline: none;
-    background: rgba(212, 175, 55, 0.2); /* Полупрозрачный золотой фон */
+    background: rgba(255, 255, 255, 0.2); /* Полупрозрачный белый фон */
     backdrop-filter: blur(10px);
     border-radius: 8px;
     font-size: 1rem;
-    color: #d4af37; /* Золотой текст */
+    color: #ffffff; /* Белый текст */
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .form-input:focus {
-    background: rgba(212, 175, 55, 0.3); /* Чуть ярче при фокусе */
+    background: rgba(255, 255, 255, 0.3);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -163,16 +163,16 @@ button {
     padding: 15px;
     border: none;
     outline: none;
-    background: rgba(212, 175, 55, 0.2); /* Полупрозрачный золотой фон */
+    background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
     border-radius: 8px;
     font-size: 1rem;
-    color: #d4af37; /* Золотой текст */
+    color: #ffffff;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .form-select:focus {
-    background: rgba(212, 175, 55, 0.3); /* Чуть ярче при фокусе */
+    background: rgba(255, 255, 255, 0.3);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -186,7 +186,7 @@ button {
 .form-checkbox input[type="checkbox"] {
     width: 20px;
     height: 20px;
-    accent-color: #d4af37; /* Золотой цвет чекбокса */
+    accent-color: #ff6b6b; /* Яркий цвет чекбокса */
     cursor: pointer;
 }
 
@@ -197,8 +197,8 @@ button {
     border-radius: 50px;
     font-size: 1rem;
     font-weight: bold;
-    color: #1a1a1a; /* Черный текст */
-    background: #d4af37; /* Золотой фон */
+    color: #ffffff;
+    background: #ff6b6b; /* Яркий цвет кнопки */
     transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     text-decoration: none;
@@ -206,7 +206,7 @@ button {
 
 .btn-primary:hover {
     transform: translateY(-3px);
-    background: #b8860b; /* Темный золотой при наведении */
+    background: #4b0082; /* Тёмный градиент при наведении */
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
@@ -216,8 +216,8 @@ button {
     border-radius: 50px;
     font-size: 1rem;
     font-weight: bold;
-    color: #d4af37; /* Золотой текст */
-    background: rgba(212, 175, 55, 0.2); /* Полупрозрачный золотой фон */
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.2);
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     text-align: center;
@@ -225,7 +225,7 @@ button {
 }
 
 .btn-secondary:hover {
-    background: rgba(212, 175, 55, 0.3); /* Чуть ярче при наведении */
+    background: rgba(255, 255, 255, 0.3);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
@@ -233,12 +233,12 @@ button {
 .jewelry-link,
 .orders-link {
     display: inline-block;
-    color: #d4af37; /* Золотой текст */
+    color: #ffffff;
     font-size: 1.2rem;
     font-weight: bold;
     padding: 10px 20px;
     border-radius: 50px;
-    background: rgba(212, 175, 55, 0.2); /* Полупрозрачный золотой фон */
+    background: rgba(255, 255, 255, 0.2);
     transition: background-color 0.3s ease, transform 0.3s ease;
     text-decoration: none;
     margin: 5px;
@@ -246,7 +246,7 @@ button {
 
 .jewelry-link:hover,
 .orders-link:hover {
-    background: rgba(212, 175, 55, 0.3); /* Чуть ярче при наведении */
+    background: rgba(255, 255, 255, 0.3);
     transform: scale(1.05);
 }
 
@@ -259,8 +259,8 @@ button {
 .vueapp-button {
     display: inline-block;
     padding: 10px 20px;
-    background: #d4af37; /* Золотой фон */
-    color: #1a1a1a; /* Черный текст */
+    background: #ff6b6b;
+    color: #ffffff;
     text-decoration: none;
     border-radius: 8px;
     font-weight: bold;
@@ -270,7 +270,7 @@ button {
 }
 
 .vueapp-button:hover {
-    background: #b8860b; /* Темный золотой */
+    background: #4b0082;
     transform: translateY(-2px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
@@ -288,13 +288,13 @@ button {
 .table-container {
     width: 100%;
     max-width: 1200px;
-    background: rgba(26, 26, 26, 0.3); /* Полупрозрачный черный фон */
+    background: rgba(26, 32, 44, 0.95); /* Тёмный прозрачный фон */
     backdrop-filter: blur(10px);
     border-radius: 16px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     padding: 20px;
     margin-bottom: 20px;
-    overflow-x: auto; /* Горизонтальная прокрутка для узких экранов */
+    overflow-x: hidden; /* Убрать горизонтальную прокрутку */
 }
 
 .styled-table {
@@ -303,83 +303,26 @@ button {
     border-spacing: 0;
     border-radius: 16px;
     overflow: hidden;
-    margin: 0 auto; /* Центрирование таблицы */
-    table-layout: auto; /* Автоматическая ширина столбцов */
+    margin: 0 auto;
+    table-layout: fixed; /* Фиксированная ширина столбцов */
 }
 
 .styled-table th,
 .styled-table td {
-    background: rgba(26, 26, 26, 0.2); /* Полупрозрачный черный фон */
-    color: #d4af37; /* Золотой текст */
+    background: rgba(26, 32, 44, 0.95);
+    color: #ffffff;
     padding: 10px;
     text-align: center;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.3); /* Золотая граница */
-    border-right: 1px solid rgba(212, 175, 55, 0.3);
-    white-space: nowrap; /* Запрет переноса текста */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .styled-table th {
-    background: rgba(26, 26, 26, 0.3); /* Полупрозрачный черный фон */
+    background: rgba(255, 107, 107, 0.7); /* Яркий фон заголовков */
     font-weight: bold;
-}
-
-/* Оптимизация ширины столбцов для заказов */
-.styled-table th:nth-child(1),
-.styled-table td:nth-child(1) { /* ID */
-    width: 5%;
-    min-width: 50px;
-}
-
-.styled-table th:nth-child(2),
-.styled-table td:nth-child(2) { /* Имя клиента */
-    width: 15%;
-    min-width: 120px;
-    max-width: 150px; /* Добавить максимальную ширину */
-}
-/* Добавьте этот стиль в ваш CSS файл */
-.styled-table td:nth-child(2) { /* Имя клиента */
-    white-space: normal; /* Разрешить перенос текста */
-    word-break: break-word; /* Переносить длинные слова */
-    max-width: 150px; /* Ограничить ширину для переноса */
-    text-align: left; /* Выравнивание по левому краю */
-    padding: 10px 5px; /* Уменьшить боковые отступы */
-}
-
-.styled-table th:nth-child(3),
-.styled-table td:nth-child(3) { /* Дата заказа */
-    width: 10%;
-    min-width: 100px;
-}
-
-.styled-table th:nth-child(4),
-.styled-table td:nth-child(4) { /* Сумма */
-    width: 10%;
-    min-width: 100px;
-}
-
-.styled-table th:nth-child(5),
-.styled-table td:nth-child(5) { /* Статус */
-    width: 10%;
-    min-width: 100px;
-}
-
-.styled-table th:nth-child(6),
-.styled-table td:nth-child(6) { /* Адрес доставки */
-    width: 25%;
-    min-width: 150px;
-    white-space: normal; /* Разрешить перенос для длинных адресов */
-}
-
-.styled-table th:nth-child(7),
-.styled-table td:nth-child(7) { /* Изображение */
-    width: 10%;
-    min-width: 100px;
-}
-
-.styled-table th:nth-child(8),
-.styled-table td:nth-child(8) { /* Действия */
-    width: 15%;
-    min-width: 120px; /* Гарантировать видимость кнопок */
 }
 
 .styled-table th:last-child,
@@ -392,7 +335,7 @@ button {
 }
 
 .styled-table tbody tr:hover {
-    background: rgba(212, 175, 55, 0.1); /* Полупрозрачный золотой фон при наведении */
+    background: rgba(255, 255, 255, 0.1);
     cursor: pointer;
 }
 
@@ -400,15 +343,157 @@ button {
     text-align: center;
     font-size: 1.2rem;
     padding: 20px;
-    color: #d4af37;
+    color: #ffffff;
+}
+
+/* Настройка ширины столбцов для таблицы клиентов */
+.clients-table th:nth-child(1),
+.clients-table td:nth-child(1) { /* ID */
+    width: 5%;
+    min-width: 50px;
+}
+
+.clients-table th:nth-child(2),
+.clients-table td:nth-child(2) { /* Фамилия */
+    width: 12%;
+    min-width: 100px;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.clients-table th:nth-child(3),
+.clients-table td:nth-child(3) { /* Имя */
+    width: 12%;
+    min-width: 100px;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.clients-table th:nth-child(4),
+.clients-table td:nth-child(4) { /* Отчество */
+    width: 12%;
+    min-width: 100px;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.clients-table th:nth-child(5),
+.clients-table td:nth-child(5) { /* Дата рождения */
+    width: 10%;
+    min-width: 100px;
+}
+
+.clients-table th:nth-child(6),
+.clients-table td:nth-child(6) { /* Email */
+    width: 15%;
+    min-width: 120px;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.clients-table th:nth-child(7),
+.clients-table td:nth-child(7) { /* Телефон */
+    width: 12%;
+    min-width: 100px;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.clients-table th:nth-child(8),
+.clients-table td:nth-child(8) { /* Подписка */
+    width: 8%;
+    min-width: 80px;
+}
+
+.clients-table th:nth-child(9),
+.clients-table td:nth-child(9) { /* Фото */
+    width: 8%;
+    min-width: 80px;
+}
+
+.clients-table th:nth-child(10),
+.clients-table td:nth-child(10) { /* Действия */
+    width: 12%;
+    min-width: 100px;
+}
+
+/* Настройка ширины столбцов для таблицы смарт-часов */
+.smartwatches-table th:nth-child(1),
+.smartwatches-table td:nth-child(1) { /* ID */
+    width: 5%;
+    min-width: 50px;
+}
+
+.smartwatches-table th:nth-child(2),
+.smartwatches-table td:nth-child(2) { /* Бренд */
+    width: 10%;
+    min-width: 80px;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.smartwatches-table th:nth-child(3),
+.smartwatches-table td:nth-child(3) { /* Модель */
+    width: 15%;
+    min-width: 120px;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.smartwatches-table th:nth-child(4),
+.smartwatches-table td:nth-child(4) { /* Цвет */
+    width: 10%;
+    min-width: 80px;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.smartwatches-table th:nth-child(5),
+.smartwatches-table td:nth-child(5) { /* Тип дисплея */
+    width: 10%;
+    min-width: 80px;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.smartwatches-table th:nth-child(6),
+.smartwatches-table td:nth-child(6) { /* Время работы батареи */
+    width: 10%;
+    min-width: 80px;
+}
+
+.smartwatches-table th:nth-child(7),
+.smartwatches-table td:nth-child(7) { /* Цена */
+    width: 10%;
+    min-width: 80px;
+}
+
+.smartwatches-table th:nth-child(8),
+.smartwatches-table td:nth-child(8) { /* В наличии */
+    width: 8%;
+    min-width: 80px;
+}
+
+.smartwatches-table th:nth-child(9),
+.smartwatches-table td:nth-child(9) { /* Фото */
+    width: 8%;
+    min-width: 80px;
+}
+
+.smartwatches-table th:nth-child(10),
+.smartwatches-table td:nth-child(10) { /* Действия */
+    width: 12%;
+    min-width: 100px;
 }
 
 .product-image {
-    max-width: 100px;
-    max-height: 100px;
+    max-width: 60px; /* Уменьшенный размер изображения */
+    max-height: 60px;
     border-radius: 8px;
     object-fit: cover;
     vertical-align: middle;
+    border: 2px solid #ffffff; /* Белая граница */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Статусы */
@@ -417,27 +502,15 @@ button {
     padding: 5px 10px;
     border-radius: 5px;
     font-weight: bold;
-    color: #1a1a1a; /* Черный текст */
+    color: #ffffff;
 }
 
 .status.available {
-    background: #d4af37; /* Золотой фон */
+    background: #ff6b6b; /* Яркий цвет */
 }
 
 .status.unavailable {
-    background: #b8860b; /* Темный золотой фон */
-}
-
-.status-в-обработке {
-    background: #d4af37; /* Золотой фон */
-}
-
-.status-отправлен {
-    background: #ffd700; /* Яркий золотой фон */
-}
-
-.status-доставлен {
-    background: #b8860b; /* Темный золотой фон */
+    background: #4b0082; /* Тёмный цвет */
 }
 
 /* Кнопки действий */
@@ -450,7 +523,7 @@ button {
 .action-btn {
     background: none;
     border: none;
-    color: #d4af37; /* Золотой цвет */
+    color: #ffffff;
     font-size: 1rem;
     cursor: pointer;
     transition: color 0.3s ease, transform 0.3s ease;
@@ -461,27 +534,27 @@ button {
 }
 
 .view-icon {
-    color: #d4af37; /* Золотой */
+    color: #ffffff;
 }
 
 .view-icon:hover {
-    color: #b8860b; /* Темный золотой */
+    color: #ff6b6b;
 }
 
 .edit-icon {
-    color: #ffd700; /* Яркий золотой */
+    color: #ffffff;
 }
 
 .edit-icon:hover {
-    color: #b8860b; /* Темный золотой */
+    color: #ff6b6b;
 }
 
 .delete-icon {
-    color: #b8860b; /* Темный золотой */
+    color: #ffffff;
 }
 
 .delete-icon:hover {
-    color: #ffd700; /* Яркий золотой */
+    color: #ff6b6b;
 }
 
 /* Контейнер продукта */
@@ -491,15 +564,9 @@ button {
     margin-bottom: 20px;
 }
 
-.product-image {
-    max-width: 200px;
-    max-height: 200px;
-    border-radius: 8px;
-}
-
-.info-container {
-    flex: 1;
-    margin-left: 20px;
+.product-image-container .product-image {
+    max-width: 150px; /* Уменьшенный размер для просмотра */
+    max-height: 150px;
 }
 
 /* Пагинация */
@@ -514,8 +581,8 @@ button {
 }
 
 .pagination a {
-    background: #d4af37; /* Золотой фон */
-    color: #1a1a1a; /* Черный текст */
+    background: #ff6b6b;
+    color: #ffffff;
     font-weight: bold;
     padding: 10px 20px;
     border-radius: 50px;
@@ -525,30 +592,30 @@ button {
 }
 
 .pagination a.active {
-    background: #b8860b; /* Темный золотой */
-    color: #1a1a1a;
+    background: #4b0082;
+    color: #ffffff;
 }
 
 .pagination a:hover:not(.active) {
-    background: #b8860b; /* Темный золотой */
+    background: #4b0082;
     transform: scale(1.05);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
 .pagination .dots {
-    color: #d4af37; /* Золотой */
+    color: #ffffff;
     pointer-events: none;
 }
 
 /* Стили для select */
 select.form-input {
-    background: rgba(212, 175, 55, 0.2); /* Полупрозрачный золотой фон */
-    color: #d4af37; /* Золотой текст */
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
 }
 
 option {
-    background: #1a1a1a; /* Черный фон для опций */
-    color: #d4af37; /* Золотой текст */
+    background: #4b0082;
+    color: #ffffff;
 }
 
 /* Анимация появления */
@@ -578,17 +645,17 @@ option {
     }
 
     .product-image {
-        max-width: 80px;
-        max-height: 80px;
+        max-width: 40px; /* Ещё меньше для мобильных */
+        max-height: 40px;
     }
 
     .product-image-container .product-image {
-        max-width: 150px;
-        max-height: 150px;
+        max-width: 120px;
+        max-height: 120px;
     }
 
     .logo {
-        max-width: 80px; /* Еще меньший размер для мобильных устройств */
+        max-width: 80px;
     }
 
     .styled-table th,
@@ -597,14 +664,20 @@ option {
         font-size: 0.9rem;
     }
 
-    .styled-table th:nth-child(6),
-    .styled-table td:nth-child(6) { /* Адрес доставки */
-        min-width: 100px;
+    .clients-table th,
+    .clients-table td,
+    .smartwatches-table th,
+    .smartwatches-table td {
+        min-width: 60px; /* Уменьшенная минимальная ширина */
     }
+}
 
-    .styled-table th:nth-child(8),
-    .styled-table td:nth-child(8) { /* Действия */
-        min-width: 100px;
-    }
-    
+/* Скрытие элементов до загрузки Alpine.js */
+[x-cloak], [x-cloak] * {
+    display: none !important;
+}
+
+/* Улучшенные тени */
+.shadow-2xl {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }

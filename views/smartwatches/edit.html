@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактировать смарт-часы</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div id="content">
+        <div class="app-container">
+            <h1 class="page-title">Редактировать смарт-часы</h1>
+            <form class="form-container" id="edit-form" method="POST" enctype="multipart/form-data">
+                <div class="input-group">
+                    <label for="brand">Бренд:</label>
+                    <input id="brand" class="form-input" type="text" name="brand" required>
+                </div>
+                <div class="input-group">
+                    <label for="model">Модель:</label>
+                    <input id="model" class="form-input" type="text" name="model" required>
+                </div>
+                <div class="input-group">
+                    <label for="color">Цвет:</label>
+                    <input id="color" class="form-input" type="text" name="color" required>
+                </div>
+                <div class="input-group">
+                    <label for="display_type">Тип дисплея:</label>
+                    <input id="display_type" class="form-input" type="text" name="display_type" required>
+                </div>
+                <div class="input-group">
+                    <label for="battery_life">Время работы батареи (часы):</label>
+                    <input id="battery_life" class="form-input" type="number" name="battery_life" required>
+                </div>
+                <div class="input-group">
+                    <label for="price">Цена (₽):</label>
+                    <input id="price" class="form-input" type="number" name="price" step="1" required>
+                </div>
+                <div class="input-group">
+                    <label for="in_stock">В наличии:</label>
+                    <input id="in_stock" class="form-checkbox" type="checkbox" name="in_stock">
+                </div>
+                <div class="input-group">
+                    <label for="photo">Фото:</label>
+                    <input id="photo" class="form-input" type="file" name="photo" accept="image/*">
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-primary" type="submit">Сохранить изменения</button>
+                    <a href="/smartwatches/index.html" class="btn-secondary">Вернуться к списку</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="/js/layout.js"></script>
+    <script src="/js/header.js"></script>
+    <script>
+        async function loadSmartwatchData() {
+            try {
+                const urlParams = new URLSearchParams(window.location.search);
+                const smartwatchId = urlParams.get('id');
+                if (!smartwatchId) {
+                    throw new Error('ID смарт-часов не указан');
+                }
+                document.getElementById('edit-form').action = `/edit-smartwatch/${smartwatchId}`;
+                const response = await fetch(`/api/view-smartwatch/${smartwatchId}`);
+                if (!response.ok) {
+                    throw new Error(`Ошибка сервера: ${response.status} ${response.statusText}`);
+                }
+                const smartwatch = await response.json();
+                document.getElementById('brand').value = smartwatch.brand || '';
+                document.getElementById('model').value = smartwatch.model || '';
+                document.getElementById('color').value = smartwatch.color || '';
+                document.getElementById('display_type').value = smartwatch.display_type || '';
+                document.getElementById('battery_life').value = smartwatch.battery_life || '';
+                document.getElementById('price').value = smartwatch.price ? Math.floor(smartwatch.price) : '';
+                document.getElementById('in_stock').checked = smartwatch.in_stock || false;
+            } catch (error) {
+                console.error('Ошибка загрузки данных:', error);
+                document.getElementById('content').innerHTML = `<p>Ошибка загрузки данных: ${error.message}</p>`;
+            }
+        }
+        window.onload = loadSmartwatchData;
+    </script>
+</body>
+</html>

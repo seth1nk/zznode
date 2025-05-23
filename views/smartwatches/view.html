@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Просмотр смарт-часов</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div id="content">
+        <div class="app-container">
+            <h1 class="page-title">Просмотр смарт-часов</h1>
+            <div class="container">
+                <div class="product-info">
+                    <div class="product-image-container" id="product-image"></div>
+                    <div class="info-container">
+                        <p><strong>Бренд:</strong> <span id="brand"></span></p>
+                        <p><strong>Модель:</strong> <span id="model"></span></p>
+                        <p><strong>Цвет:</strong> <span id="color"></span></p>
+                        <p><strong>Тип дисплея:</strong> <span id="display_type"></span></p>
+                        <p><strong>Время работы батареи (часы):</strong> <span id="battery_life"></span></p>
+                        <p><strong>Цена:</strong> <span id="price"></span> ₽</p>
+                        <p><strong>В наличии:</strong> <span id="in_stock"></span></p>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <a href="/smartwatches/index.html" class="btn-secondary">Вернуться к списку</a>
+                    <a id="edit-link" class="btn-primary">Редактировать</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/layout.js"></script>
+    <script src="/js/header.js"></script>
+    <script>
+        async function loadSmartwatchData() {
+            try {
+                const urlParams = new URLSearchParams(window.location.search);
+                const smartwatchId = urlParams.get('id');
+                if (!smartwatchId) {
+                    throw new Error('ID смарт-часов не указан');
+                }
+                const response = await fetch(`/api/view-smartwatch/${smartwatchId}`);
+                if (!response.ok) {
+                    throw new Error(`Ошибка сервера: ${response.status} ${response.statusText}`);
+                }
+                const smartwatch = await response.json();
+                document.getElementById('product-image').innerHTML = smartwatch.photo ? `<img class="product-image" src="${smartwatch.photo.replace('/img/', '/images/')}" alt="Smartwatch Photo">` : 'Нет изображения';
+                document.getElementById('brand').textContent = smartwatch.brand || 'N/A';
+                document.getElementById('model').textContent = smartwatch.model || 'N/A';
+                document.getElementById('color').textContent = smartwatch.color || 'N/A';
+                document.getElementById('display_type').textContent = smartwatch.display_type || 'N/A';
+                document.getElementById('battery_life').textContent = smartwatch.battery_life || 'N/A';
+                document.getElementById('price').textContent = smartwatch.price ? Math.floor(smartwatch.price) : 'N/A';
+                document.getElementById('in_stock').innerHTML = `<span class="status ${smartwatch.in_stock ? 'available' : 'unavailable'}">${smartwatch.in_stock ? 'Да' : 'Нет'}</span>`;
+                document.getElementById('edit-link').href = `/smartwatches/edit.html?id=${smartwatch.id}`;
+            } catch (error) {
+                console.error('Ошибка загрузки данных:', error);
+                document.getElementById('content').innerHTML = `<p>Ошибка загрузки данных: ${error.message}</p>`;
+            }
+        }
+        window.onload = loadSmartwatchData;
+    </script>
+</body>
+</html>

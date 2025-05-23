@@ -5,13 +5,13 @@ const logger = require('morgan');
 const cors = require('cors');
 const { Sequelize } = require('sequelize');
 const authRouter = require('./routes/auth');
-const jewelryRouter = require('./routes/jewelry');
-const ordersRouter = require('./routes/orders');
+const clientsRouter = require('./routes/clients');
+const smartwatchesRouter = require('./routes/smartwatches');
 const authRequired = require('./middleware/authRequired');
 
 const app = express();
 
-const sequelize = new Sequelize('postgresql://uqhnsy0zoriffb7sednp:EzBtfkqYZhEDeJyh4bBNqCP1VhCdSC@bsgrmqwceckysck4ikkx-postgresql.services.clever-cloud.com:50013/bsgrmqwceckysck4ikkx', {
+const sequelize = new Sequelize('postgresql://uwbrrzerxx05zn6dd4ha:FxrjVohfWjKljhepkR8zyTE0FpAvK1@bcyknwpphsrxdyve4pho-postgresql.services.clever-cloud.com:50013/bcyknwpphsrxdyve4pho', {
     dialect: 'postgres',
     logging: console.log,
     dialectOptions: {
@@ -22,7 +22,7 @@ const sequelize = new Sequelize('postgresql://uqhnsy0zoriffb7sednp:EzBtfkqYZhEDe
     },
 });
 
-const { User, Jewelry, Order } = require('./models');
+const { User, Client, Smartwatch } = require('./models');
 
 sequelize.sync({ alter: true })
     .then(() => console.log('Models synchronized with database'))
@@ -33,18 +33,18 @@ app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors({
-    origin: 'https://denglebov.netlify.app',
+    origin: 'http://localhost:8080',
     credentials: true,
 }));
 app.use('/css', express.static(path.join(__dirname, 'css')));
 app.use('/images', express.static(path.join(__dirname, 'images')));
-app.use('/jewelry', express.static(path.join(__dirname, 'views', 'jewelry')));
-app.use('/orders', express.static(path.join(__dirname, 'views', 'orders')));
+app.use('/clients', express.static(path.join(__dirname, 'views', 'clients')));
+app.use('/smartwatches', express.static(path.join(__dirname, 'views', 'smartwatches')));
 app.use('/js', express.static(path.join(__dirname, 'js')));
 
 app.use('/auth', authRouter);
-app.use('/', jewelryRouter);
-app.use('/', ordersRouter);
+app.use('/', clientsRouter);
+app.use('/', smartwatchesRouter);
 
 app.get('/', authRequired, (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'index.html'));

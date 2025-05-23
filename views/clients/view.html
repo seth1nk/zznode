@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Просмотр клиента</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div id="content">
+        <div class="app-container">
+            <h1 class="page-title">Просмотр клиента</h1>
+            <div class="container">
+                <div class="product-info">
+                    <div class="product-image-container" id="product-image"></div>
+                    <div class="info-container">
+                        <p><strong>Фамилия:</strong> <span id="last_name"></span></p>
+                        <p><strong>Имя:</strong> <span id="first_name"></span></p>
+                        <p><strong>Отчество:</strong> <span id="middle_name"></span></p>
+                        <p><strong>Дата рождения:</strong> <span id="birth_date"></span></p>
+                        <p><strong>Email:</strong> <span id="email"></span></p>
+                        <p><strong>Телефон:</strong> <span id="phone"></span></p>
+                        <p><strong>Подписка:</strong> <span id="is_subscribed"></span></p>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <a href="/clients/index.html" class="btn-secondary">Вернуться к списку</a>
+                    <a id="edit-link" class="btn-primary">Редактировать</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/layout.js"></script>
+    <script src="/js/header.js"></script>
+    <script>
+        async function loadClientData() {
+            try {
+                const urlParams = new URLSearchParams(window.location.search);
+                const clientId = urlParams.get('id');
+                if (!clientId) {
+                    throw new Error('ID клиента не указан');
+                }
+                const response = await fetch(`/api/view-client/${clientId}`);
+                if (!response.ok) {
+                    throw new Error(`Ошибка сервера: ${response.status} ${response.statusText}`);
+                }
+                const client = await response.json();
+                document.getElementById('product-image').innerHTML = client.photo ? `<img class="product-image" src="${client.photo.replace('/img/', '/images/')}" alt="Client Photo">` : 'Нет изображения';
+                document.getElementById('last_name').textContent = client.last_name || 'N/A';
+                document.getElementById('first_name').textContent = client.first_name || 'N/A';
+                document.getElementById('middle_name').textContent = client.middle_name || 'N/A';
+                document.getElementById('birth_date').textContent = client.birth_date || 'N/A';
+                document.getElementById('email').textContent = client.email || 'N/A';
+                document.getElementById('phone').textContent = client.phone || 'N/A';
+                document.getElementById('is_subscribed').innerHTML = `<span class="status ${client.is_subscribed ? 'available' : 'unavailable'}">${client.is_subscribed ? 'Да' : 'Нет'}</span>`;
+                document.getElementById('edit-link').href = `/clients/edit.html?id=${client.id}`;
+            } catch (error) {
+                console.error('Ошибка загрузки данных:', error);
+                document.getElementById('content').innerHTML = `<p>Ошибка загрузки данных: ${error.message}</p>`;
+            }
+        }
+        window.onload = loadClientData;
+    </script>
+</body>
+</html>

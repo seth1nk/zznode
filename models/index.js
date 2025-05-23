@@ -1,8 +1,8 @@
 const { Sequelize, DataTypes } = require('sequelize');
 
-const sequelize = new Sequelize('postgresql://uqhnsy0zoriffb7sednp:EzBtfkqYZhEDeJyh4bBNqCP1VhCdSC@bsgrmqwceckysck4ikkx-postgresql.services.clever-cloud.com:50013/bsgrmqwceckysck4ikkx', {
+const sequelize = new Sequelize('postgresql://uwbrrzerxx05zn6dd4ha:FxrjVohfWjKljhepkR8zyTE0FpAvK1@bcyknwpphsrxdyve4pho-postgresql.services.clever-cloud.com:50013/bcyknwpphsrxdyve4pho', {
     dialect: 'postgres',
-    logging: false, // Отключите логирование SQL запросов в production для чистоты логов
+    logging: false,
     dialectOptions: {
         ssl: {
             require: true,
@@ -10,15 +10,14 @@ const sequelize = new Sequelize('postgresql://uqhnsy0zoriffb7sednp:EzBtfkqYZhEDe
         },
     },
     define: {
-        // Можно определить глобальные опции для всех моделей
-        timestamps: true, // Добавляет createdAt и updatedAt
-        underscored: true, // Использует snake_case для автоматически создаваемых полей (вроде внешних ключей)
+        timestamps: true,
+        underscored: true,
     }
 });
 
 const User = require('./User')(sequelize, DataTypes);
-const Jewelry = require('./Jewelry')(sequelize, DataTypes);
-const Order = require('./Orders')(sequelize, DataTypes);
+const Client = require('./Clients')(sequelize, DataTypes);
+const Smartwatch = require('./Smartwatches')(sequelize, DataTypes);
 
 sequelize.sync({ alter: true })
     .then(() => console.log('Models synchronized with database'))
@@ -27,6 +26,6 @@ sequelize.sync({ alter: true })
 module.exports = {
     sequelize,
     User,
-    Jewelry,
-    Order,
+    Client,
+    Smartwatch
 };
