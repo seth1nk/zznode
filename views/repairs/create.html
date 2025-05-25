@@ -13,19 +13,23 @@
             <h1 class="page-title">Добавить новый ремонт</h1>
             <form class="form-container" id="create-form" method="POST" enctype="multipart/form-data">
                 <div class="input-group">
-                    <label for="device_type">Тип устройства:</label>
-                    <input id="device_type" class="form-input" type="text" name="device_type" required>
+                    <label for="client_name">Имя клиента:</label>
+                    <input id="client_name" class="form-input" type="text" name="client_name" required>
                 </div>
                 <div class="input-group">
-                    <label for="device_brand">Бренд:</label>
-                    <input id="device_brand" class="form-input" type="text" name="device_brand" required>
+                    <label for="type">Тип холодильника:</label>
+                    <input id="type" class="form-input" type="text" name="type" required>
                 </div>
                 <div class="input-group">
-                    <label for="device_model">Модель:</label>
-                    <input id="device_model" class="form-input" type="text" name="device_model" required>
+                    <label for="brand">Бренд:</label>
+                    <input id="brand" class="form-input" type="text" name="brand" required>
                 </div>
                 <div class="input-group">
-                    <label for="issue_description">Описание проблемы:</label>
+                    <label for="model">Модель:</label>
+                    <input id="model" class="form-input" type="text" name="model" required>
+                </div>
+                <div class="input-group">
+                    <label for="issue_description">Описание неисправности:</label>
                     <textarea id="issue_description" class="form-input" name="issue_description" required></textarea>
                 </div>
                 <div class="input-group">
@@ -34,11 +38,12 @@
                 </div>
                 <div class="input-group">
                     <label for="status">Статус:</label>
-                    <input id="status" class="form-input" type="text" name="status" required>
-                </div>
-                <div class="input-group">
-                    <label for="date">Дата:</label>
-                    <input id="date" class="form-input" type="date" name="date">
+                    <select id="status" class="form-input" name="status" required>
+                        <option value="accepted">Принят</option>
+                        <option value="in_progress">В процессе</option>
+                        <option value="completed">Завершен</option>
+                        <option value="canceled">Отменен</option>
+                    </select>
                 </div>
                 <div class="input-group">
                     <label for="photo">Выберите фото:</label>

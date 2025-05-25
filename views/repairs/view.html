@@ -15,13 +15,13 @@
                 <div class="product-info">
                     <div class="product-image-container" id="product-image"></div>
                     <div class="info-container">
-                        <p><strong>Тип устройства:</strong> <span id="device_type"></span></p>
-                        <p><strong>Бренд:</strong> <span id="device_brand"></span></p>
-                        <p><strong>Модель:</strong> <span id="device_model"></span></p>
-                        <p><strong>Описание проблемы:</strong> <span id="issue_description"></span></p>
+                        <p><strong>Имя клиента:</strong> <span id="client_name"></span></p>
+                        <p><strong>Тип холодильника:</strong> <span id="type"></span></p>
+                        <p><strong>Бренд:</strong> <span id="brand"></span></p>
+                        <p><strong>Модель:</strong> <span id="model"></span></p>
+                        <p><strong>Описание неисправности:</strong> <span id="issue_description"></span></p>
                         <p><strong>Стоимость ремонта:</strong> <span id="repair_cost"></span></p>
                         <p><strong>Статус:</strong> <span id="status"></span></p>
-                        <p><strong>Дата:</strong> <span id="date"></span></p>
                     </div>
                 </div>
                 <div class="action-buttons">
@@ -47,13 +47,13 @@
                 }
                 const repair = await response.json();
                 document.getElementById('product-image').innerHTML = repair.photo ? `<img class="product-image" src="${repair.photo.replace('/img/', '/images/')}" alt="Repair Photo">` : 'Нет изображения';
-                document.getElementById('device_type').textContent = repair.device_type || 'N/A';
-                document.getElementById('device_brand').textContent = repair.device_brand || 'N/A';
-                document.getElementById('device_model').textContent = repair.device_model || 'N/A';
+                document.getElementById('client_name').textContent = repair.client_name || 'N/A';
+                document.getElementById('type').textContent = repair.type || 'N/A';
+                document.getElementById('brand').textContent = repair.brand || 'N/A';
+                document.getElementById('model').textContent = repair.model || 'N/A';
                 document.getElementById('issue_description').textContent = repair.issue_description || 'N/A';
                 document.getElementById('repair_cost').textContent = repair.repair_cost || 'N/A';
                 document.getElementById('status').textContent = repair.status || 'N/A';
-                document.getElementById('date').textContent = repair.date || 'N/A';
                 document.getElementById('edit-link').href = `/repairs/edit.html?id=${repair.id}`;
             } catch (error) {
                 console.error('Ошибка загрузки данных:', error);

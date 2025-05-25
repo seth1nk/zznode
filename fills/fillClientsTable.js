@@ -2,7 +2,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 const { faker } = require('@faker-js/faker/locale/ru');
 const path = require('path');
 const fs = require('fs');
-const sequelize = new Sequelize('postgresql://ul1e6bvbtulgghqikapt:HBmabTXjQKj9cuvnVQJJMMGcnDfwqf@bok8olbwcb3wgp8da8ze-postgresql.services.clever-cloud.com:50013/bok8olbwcb3wgp8da8ze', {
+const sequelize = new Sequelize('postgresql://uhri6rljeutxcoo4ldel:QMnQBcOhZrQL3DXnw7vO75mBGRTvSV@bgejjcdl1op7xb2ptvdr-postgresql.services.clever-cloud.com:50013/bgejjcdl1op7xb2ptvdr', {
     dialect: 'postgres',
     logging: false,
     dialectOptions: {
@@ -13,7 +13,7 @@ const sequelize = new Sequelize('postgresql://ul1e6bvbtulgghqikapt:HBmabTXjQKj9c
     },
 });
 const Client = require('../models/Client')(sequelize, DataTypes);
-const sampleImages = ['t1.jpg', 't2.jpg', 't3.jpg', 't4.jpg', 't5.jpg', 't6.jpg'];
+const sampleImages = ['11.png', '22.png', '33.png', '44.png', '55.png', '66.jpeg'];
 
 async function fillClientsTable(count) {
     try {
@@ -25,8 +25,8 @@ async function fillClientsTable(count) {
                 phone: faker.phone.number(),
                 email: faker.internet.email(),
                 address: faker.location.streetAddress(),
-                birth_date: faker.date.birthdate({ min: 18, max: 80, mode: 'age' }),
                 notes: faker.lorem.sentence(),
+                preferred_contact: faker.helpers.arrayElement(['phone', 'email', null]),
                 photo: null
             });
 

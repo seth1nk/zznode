@@ -2,7 +2,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 const { faker } = require('@faker-js/faker/locale/ru');
 const path = require('path');
 const fs = require('fs');
-const sequelize = new Sequelize('postgresql://ul1e6bvbtulgghqikapt:HBmabTXjQKj9cuvnVQJJMMGcnDfwqf@bok8olbwcb3wgp8da8ze-postgresql.services.clever-cloud.com:50013/bok8olbwcb3wgp8da8ze', {
+const sequelize = new Sequelize('postgresql://uhri6rljeutxcoo4ldel:QMnQBcOhZrQL3DXnw7vO75mBGRTvSV@bgejjcdl1op7xb2ptvdr-postgresql.services.clever-cloud.com:50013/bgejjcdl1op7xb2ptvdr', {
     dialect: 'postgres',
     logging: false,
     dialectOptions: {
@@ -13,23 +13,20 @@ const sequelize = new Sequelize('postgresql://ul1e6bvbtulgghqikapt:HBmabTXjQKj9c
     },
 });
 const Repair = require('../models/Repair')(sequelize, DataTypes);
-const deviceTypes = ['Смартфон', 'Планшет', 'Ноутбук', 'Часы', 'Компьютер'];
-const brands = ['Apple', 'Samsung', 'Xiaomi', 'Huawei', 'Dell'];
-const statuses = ['В ожидании', 'В ремонте', 'Завершен', 'Отменен'];
-const sampleImages = ['tele1.jpg', 'tele2.png'];
+const sampleImages = ['t1.png', 't2.png'];
 
 async function fillRepairsTable(count) {
     try {
         await sequelize.sync();
         for (let i = 0; i < count; i++) {
             const repair = await Repair.create({
-                device_type: faker.helpers.arrayElement(deviceTypes),
-                device_brand: faker.helpers.arrayElement(brands),
-                device_model: faker.commerce.productName(),
+                client_name: `${faker.person.firstName()} ${faker.person.lastName()}`,
+                type: faker.helpers.arrayElement(['однокамерный', 'двухкамерный', 'side-by-side', 'встраиваемый']),
+                brand: faker.company.name(),
+                model: faker.vehicle.model(),
                 issue_description: faker.lorem.sentence(),
-                repair_cost: faker.number.int({ min: 1000, max: 50000 }),
-                status: faker.helpers.arrayElement(statuses),
-                date: faker.date.recent({ days: 30 }),
+                repair_cost: faker.number.float({ min: 1000, max: 50000, precision: 0.01 }),
+                status: faker.helpers.arrayElement(['accepted', 'in_progress', 'completed', 'canceled']),
                 photo: null
             });
 

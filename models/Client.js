@@ -5,9 +5,9 @@ module.exports = (sequelize, DataTypes) => {
         last_name: { type: DataTypes.STRING, allowNull: false },
         phone: { type: DataTypes.STRING, allowNull: false },
         email: { type: DataTypes.STRING, allowNull: true },
-        address: { type: DataTypes.STRING, allowNull: true },
-        birth_date: { type: DataTypes.DATEONLY, allowNull: true },
+        address: { type: DataTypes.STRING, allowNull: false },
         notes: { type: DataTypes.TEXT, allowNull: true },
+        preferred_contact: { type: DataTypes.STRING, allowNull: true },
         photo: { type: DataTypes.STRING, allowNull: true }
     }, {
         tableName: 'clients',

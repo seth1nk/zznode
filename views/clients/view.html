@@ -20,8 +20,8 @@
                         <p><strong>Телефон:</strong> <span id="phone"></span></p>
                         <p><strong>Email:</strong> <span id="email"></span></p>
                         <p><strong>Адрес:</strong> <span id="address"></span></p>
-                        <p><strong>Дата рождения:</strong> <span id="birth_date"></span></p>
                         <p><strong>Заметки:</strong> <span id="notes"></span></p>
+                        <p><strong>Предпочитаемый способ связи:</strong> <span id="preferred_contact"></span></p>
                     </div>
                 </div>
                 <div class="action-buttons">
@@ -52,8 +52,8 @@
                 document.getElementById('phone').textContent = client.phone || 'N/A';
                 document.getElementById('email').textContent = client.email || 'N/A';
                 document.getElementById('address').textContent = client.address || 'N/A';
-                document.getElementById('birth_date').textContent = client.birth_date || 'N/A';
                 document.getElementById('notes').textContent = client.notes || 'N/A';
+                document.getElementById('preferred_contact').textContent = client.preferred_contact || 'N/A';
                 document.getElementById('edit-link').href = `/clients/edit.html?id=${client.id}`;
             } catch (error) {
                 console.error('Ошибка загрузки данных:', error);

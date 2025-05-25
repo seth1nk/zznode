@@ -32,7 +32,7 @@ router.get('/api/clients', authRequired, async (req, res) => {
             limit,
             offset,
             order: [['id', 'ASC']],
-            attributes: ['id', 'first_name', 'last_name', 'phone', 'email', 'address', 'birth_date', 'notes', 'photo'],
+            attributes: ['id', 'first_name', 'last_name', 'phone', 'email', 'address', 'notes', 'preferred_contact', 'photo'],
         });
 
         const totalPages = Math.ceil(count / limit);
@@ -44,8 +44,8 @@ router.get('/api/clients', authRequired, async (req, res) => {
             phone: item.phone,
             email: item.email,
             address: item.address,
-            birth_date: item.birth_date,
             notes: item.notes,
+            preferred_contact: item.preferred_contact,
             photo: item.photo ? item.photo.replace('/img/', '/images/') : null,
         }));
 
@@ -64,7 +64,7 @@ router.get('/api/clients', authRequired, async (req, res) => {
 router.get('/api/view-client/:id', authRequired, async (req, res) => {
     try {
         const client = await Client.findByPk(req.params.id, {
-            attributes: ['id', 'first_name', 'last_name', 'phone', 'email', 'address', 'birth_date', 'notes', 'photo'],
+            attributes: ['id', 'first_name', 'last_name', 'phone', 'email', 'address', 'notes', 'preferred_contact', 'photo'],
         });
         if (!client) {
             return res.status(404).json({ error: 'Клиент не найден' });
@@ -76,8 +76,8 @@ router.get('/api/view-client/:id', authRequired, async (req, res) => {
             phone: client.phone,
             email: client.email,
             address: client.address,
-            birth_date: client.birth_date,
             notes: client.notes,
+            preferred_contact: client.preferred_contact,
             photo: client.photo ? client.photo.replace('/img/', '/images/') : null,
         };
         res.json(formattedClient);
@@ -89,15 +89,15 @@ router.get('/api/view-client/:id', authRequired, async (req, res) => {
 
 router.post('/api/clients', authRequired, async (req, res) => {
     try {
-        const { first_name, last_name, phone, email, address, birth_date, notes, photo } = req.body;
+        const { first_name, last_name, phone, email, address, notes, preferred_contact, photo } = req.body;
         const client = await Client.create({
             first_name,
             last_name,
             phone,
             email,
             address,
-            birth_date,
             notes,
+            preferred_contact,
             photo: photo ? photo.replace('/img/', '/images/') : null,
         });
         const formattedClient = {
@@ -107,8 +107,8 @@ router.post('/api/clients', authRequired, async (req, res) => {
             phone: client.phone,
             email: client.email,
             address: client.address,
-            birth_date: client.birth_date,
             notes: client.notes,
+            preferred_contact: client.preferred_contact,
             photo: client.photo,
         };
         res.status(201).json(formattedClient);
@@ -121,23 +121,23 @@ router.post('/api/clients', authRequired, async (req, res) => {
 router.post('/add-client', authRequired, upload.single('photo'), async (req, res) => {
     let client;
     try {
-        const requiredFields = ['first_name', 'last_name', 'phone'];
+        const requiredFields = ['first_name', 'last_name', 'phone', 'address'];
         for (const field of requiredFields) {
             if (!req.body[field]) {
                 throw new Error(`Отсутствует обязательное поле: ${field}`);
             }
         }
 
-        const { first_name, last_name, phone, email, address, birth_date, notes } = req.body;
+        const { first_name, last_name, phone, email, address, notes, preferred_contact } = req.body;
         client = await Client.create({
             first_name: first_name.trim(),
             last_name: last_name.trim(),
             phone: phone.trim(),
             email: email ? email.trim() : null,
-            address: address ? address.trim() : null,
-            birth_date: birth_date || null,
+            address: address.trim(),
             notes: notes ? notes.trim() : null,
-            photo: null
+            preferred_contact: preferred_contact ? preferred_contact.trim() : null,
+            photo: null,
         });
 
         let photoPath = null;
@@ -164,15 +164,15 @@ router.put('/api/clients/:id', authRequired, async (req, res) => {
         if (!client) {
             return res.status(404).json({ error: 'Клиент не найден' });
         }
-        const { first_name, last_name, phone, email, address, birth_date, notes, photo } = req.body;
+        const { first_name, last_name, phone, email, address, notes, preferred_contact, photo } = req.body;
         await client.update({
             first_name,
             last_name,
             phone,
             email,
             address,
-            birth_date,
             notes,
+            preferred_contact,
             photo: photo ? photo.replace('/img/', '/images/') : null,
         });
         const formattedClient = {
@@ -182,8 +182,8 @@ router.put('/api/clients/:id', authRequired, async (req, res) => {
             phone: client.phone,
             email: client.email,
             address: client.address,
-            birth_date: client.birth_date,
             notes: client.notes,
+            preferred_contact: client.preferred_contact,
             photo: client.photo,
         };
         res.json(formattedClient);
@@ -199,7 +199,7 @@ router.post('/edit-client/:id', authRequired, upload.single('photo'), async (req
         if (!client) {
             return res.status(404).send('Клиент не найден');
         }
-        const { first_name, last_name, phone, email, address, birth_date, notes } = req.body;
+        const { first_name, last_name, phone, email, address, notes, preferred_contact } = req.body;
         let photoPath = client.photo;
         if (req.file) {
             const newFilePath = path.join(__dirname, '../images', 'clients', req.file.originalname);
@@ -213,9 +213,9 @@ router.post('/edit-client/:id', authRequired, upload.single('photo'), async (req
             last_name: last_name.trim(),
             phone: phone.trim(),
             email: email ? email.trim() : null,
-            address: address ? address.trim() : null,
-            birth_date: birth_date || null,
+            address: address.trim(),
             notes: notes ? notes.trim() : null,
+            preferred_contact: preferred_contact ? preferred_contact.trim() : null,
             photo: photoPath,
         });
         res.redirect('/clients/index.html');

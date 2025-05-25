@@ -32,20 +32,20 @@ router.get('/api/repairs', authRequired, async (req, res) => {
             limit,
             offset,
             order: [['id', 'ASC']],
-            attributes: ['id', 'device_type', 'device_brand', 'device_model', 'issue_description', 'repair_cost', 'status', 'date', 'photo'],
+            attributes: ['id', 'client_name', 'type', 'brand', 'model', 'issue_description', 'repair_cost', 'status', 'photo'],
         });
 
         const totalPages = Math.ceil(count / limit);
 
         const formattedRepairs = rows.map(item => ({
             id: item.id,
-            device_type: item.device_type,
-            device_brand: item.device_brand,
-            device_model: item.device_model,
+            client_name: item.client_name,
+            type: item.type,
+            brand: item.brand,
+            model: item.model,
             issue_description: item.issue_description,
-            repair_cost: parseFloat(item.repair_cost),
+            repair_cost: item.repair_cost,
             status: item.status,
-            date: item.date,
             photo: item.photo ? item.photo.replace('/img/', '/images/') : null,
         }));
 
@@ -64,20 +64,20 @@ router.get('/api/repairs', authRequired, async (req, res) => {
 router.get('/api/view-repair/:id', authRequired, async (req, res) => {
     try {
         const repair = await Repair.findByPk(req.params.id, {
-            attributes: ['id', 'device_type', 'device_brand', 'device_model', 'issue_description', 'repair_cost', 'status', 'date', 'photo'],
+            attributes: ['id', 'client_name', 'type', 'brand', 'model', 'issue_description', 'repair_cost', 'status', 'photo'],
         });
         if (!repair) {
             return res.status(404).json({ error: 'Ремонт не найден' });
         }
         const formattedRepair = {
             id: repair.id,
-            device_type: repair.device_type,
-            device_brand: repair.device_brand,
-            device_model: repair.device_model,
+            client_name: repair.client_name,
+            type: repair.type,
+            brand: repair.brand,
+            model: repair.model,
             issue_description: repair.issue_description,
-            repair_cost: parseFloat(repair.repair_cost),
+            repair_cost: repair.repair_cost,
             status: repair.status,
-            date: repair.date,
             photo: repair.photo ? repair.photo.replace('/img/', '/images/') : null,
         };
         res.json(formattedRepair);
@@ -89,26 +89,26 @@ router.get('/api/view-repair/:id', authRequired, async (req, res) => {
 
 router.post('/api/repairs', authRequired, async (req, res) => {
     try {
-        const { device_type, device_brand, device_model, issue_description, repair_cost, status, date, photo } = req.body;
+        const { client_name, type, brand, model, issue_description, repair_cost, status, photo } = req.body;
         const repair = await Repair.create({
-            device_type,
-            device_brand,
-            device_model,
+            client_name,
+            type,
+            brand,
+            model,
             issue_description,
-            repair_cost: parseFloat(repair_cost),
+            repair_cost,
             status,
-            date,
             photo: photo ? photo.replace('/img/', '/images/') : null,
         });
         const formattedRepair = {
             id: repair.id,
-            device_type: repair.device_type,
-            device_brand: repair.device_brand,
-            device_model: repair.device_model,
+            client_name: repair.client_name,
+            type: repair.type,
+            brand: repair.brand,
+            model: repair.model,
             issue_description: repair.issue_description,
-            repair_cost: parseFloat(repair.repair_cost),
+            repair_cost: repair.repair_cost,
             status: repair.status,
-            date: repair.date,
             photo: repair.photo,
         };
         res.status(201).json(formattedRepair);
@@ -121,28 +121,23 @@ router.post('/api/repairs', authRequired, async (req, res) => {
 router.post('/add-repair', authRequired, upload.single('photo'), async (req, res) => {
     let repair;
     try {
-        const requiredFields = ['device_type', 'device_brand', 'device_model', 'issue_description', 'repair_cost', 'status'];
+        const requiredFields = ['client_name', 'type', 'brand', 'model', 'issue_description', 'repair_cost', 'status'];
         for (const field of requiredFields) {
             if (!req.body[field]) {
                 throw new Error(`Отсутствует обязательное поле: ${field}`);
             }
         }
 
-        const { device_type, device_brand, device_model, issue_description, repair_cost, status, date } = req.body;
-        const numericRepairCost = parseFloat(repair_cost);
-        if (isNaN(numericRepairCost)) {
-            throw new Error('Стоимость ремонта должна быть числом');
-        }
-
+        const { client_name, type, brand, model, issue_description, repair_cost, status } = req.body;
         repair = await Repair.create({
-            device_type: device_type.trim(),
-            device_brand: device_brand.trim(),
-            device_model: device_model.trim(),
+            client_name: client_name.trim(),
+            type: type.trim(),
+            brand: brand.trim(),
+            model: model.trim(),
             issue_description: issue_description.trim(),
-            repair_cost: numericRepairCost,
-            status: status.trim(),
-            date: date || null,
-            photo: null
+            repair_cost,
+            status,
+            photo: null,
         });
 
         let photoPath = null;
@@ -169,26 +164,26 @@ router.put('/api/repairs/:id', authRequired, async (req, res) => {
         if (!repair) {
             return res.status(404).json({ error: 'Ремонт не найден' });
         }
-        const { device_type, device_brand, device_model, issue_description, repair_cost, status, date, photo } = req.body;
+        const { client_name, type, brand, model, issue_description, repair_cost, status, photo } = req.body;
         await repair.update({
-            device_type,
-            device_brand,
-            device_model,
+            client_name,
+            type,
+            brand,
+            model,
             issue_description,
-            repair_cost: parseFloat(repair_cost),
+            repair_cost,
             status,
-            date,
             photo: photo ? photo.replace('/img/', '/images/') : null,
         });
         const formattedRepair = {
             id: repair.id,
-            device_type: repair.device_type,
-            device_brand: repair.device_brand,
-            device_model: repair.device_model,
+            client_name: repair.client_name,
+            type: repair.type,
+            brand: repair.brand,
+            model: repair.model,
             issue_description: repair.issue_description,
-            repair_cost: parseFloat(repair.repair_cost),
+            repair_cost: repair.repair_cost,
             status: repair.status,
-            date: repair.date,
             photo: repair.photo,
         };
         res.json(formattedRepair);
@@ -204,7 +199,7 @@ router.post('/edit-repair/:id', authRequired, upload.single('photo'), async (req
         if (!repair) {
             return res.status(404).send('Ремонт не найден');
         }
-        const { device_type, device_brand, device_model, issue_description, repair_cost, status, date } = req.body;
+        const { client_name, type, brand, model, issue_description, repair_cost, status } = req.body;
         let photoPath = repair.photo;
         if (req.file) {
             const newFilePath = path.join(__dirname, '../images', 'repairs', req.file.originalname);
@@ -214,13 +209,13 @@ router.post('/edit-repair/:id', authRequired, upload.single('photo'), async (req
             photoPath = `/images/repairs/${req.file.originalname}`;
         }
         await repair.update({
-            device_type: device_type.trim(),
-            device_brand: device_brand.trim(),
-            device_model: device_model.trim(),
+            client_name: client_name.trim(),
+            type: type.trim(),
+            brand: brand.trim(),
+            model: model.trim(),
             issue_description: issue_description.trim(),
-            repair_cost: parseFloat(repair_cost),
-            status: status.trim(),
-            date: date || null,
+            repair_cost,
+            status,
             photo: photoPath,
         });
         res.redirect('/repairs/index.html');

@@ -6,34 +6,6 @@
     <title>Список ремонтов</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="/css/style.css">
-    <style>
-        /* Стили для статуса */
-        .status {
-            display: inline-block;
-            padding: 6px 12px;
-            border-radius: 12px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            text-align: center;
-            min-width: 100px;
-        }
-        .status.pending {
-            background: #3498db; /* Синий для "В ожидании" */
-            color: #ffffff;
-        }
-        .status.in-progress {
-            background: #e67e22; /* Оранжевый для "В ремонте" */
-            color: #ffffff;
-        }
-        .status.completed {
-            background: #2ecc71; /* Зеленый для "Завершен" */
-            color: #ffffff;
-        }
-        .status.cancelled {
-            background: #7f8c8d; /* Серый для "Отменен" */
-            color: #ffffff;
-        }
-    </style>
 </head>
 <body>
     <div id="content">
@@ -47,13 +19,13 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Тип устройства</th>
+                            <th>Имя клиента</th>
+                            <th>Тип холодильника</th>
                             <th>Бренд</th>
                             <th>Модель</th>
-                            <th>Описание проблемы</th>
+                            <th>Описание неисправности</th>
                             <th>Стоимость ремонта</th>
                             <th>Статус</th>
-                            <th>Дата</th>
                             <th>Фото</th>
                             <th>Действия</th>
                         </tr>
@@ -87,34 +59,16 @@
                     tbody.innerHTML = '<tr><td colspan="10" class="no-data">Нет ремонтов</td></tr>';
                 } else {
                     repairs.forEach((item, index) => {
-                        // Определяем класс статуса на основе значения
-                        let statusClass;
-                        switch (item.status) {
-                            case 'В ожидании':
-                                statusClass = 'pending';
-                                break;
-                            case 'В ремонте':
-                                statusClass = 'in-progress';
-                                break;
-                            case 'Завершен':
-                                statusClass = 'completed';
-                                break;
-                            case 'Отменен':
-                                statusClass = 'cancelled';
-                                break;
-                            default:
-                                statusClass = 'pending'; // По умолчанию
-                        }
                         const row = `
                             <tr>
                                 <td>${index + 1 + (currentPage - 1) * 10}</td>
-                                <td>${item.device_type || 'N/A'}</td>
-                                <td>${item.device_brand || 'N/A'}</td>
-                                <td>${item.device_model || 'N/A'}</td>
+                                <td>${item.client_name || 'N/A'}</td>
+                                <td>${item.type || 'N/A'}</td>
+                                <td>${item.brand || 'N/A'}</td>
+                                <td>${item.model || 'N/A'}</td>
                                 <td>${item.issue_description || 'N/A'}</td>
                                 <td>${item.repair_cost || 'N/A'}</td>
-                                <td><span class="status ${statusClass}">${item.status || 'N/A'}</span></td>
-                                <td>${item.date || 'N/A'}</td>
+                                <td>${item.status || 'N/A'}</td>
                                 <td>${item.photo ? `<img class="product-image" src="${item.photo.replace('/img/', '/images/')}" alt="Repair Photo">` : 'N/A'}</td>
                                 <td>
                                     <div class="action-buttons">
