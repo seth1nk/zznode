@@ -19,8 +19,8 @@ html {
 
 body {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, #3c2f2f, #4a7043); /* Глубокий бордовый и темно-зеленый градиент */
-    color: #f5f5f5; /* Светлый текст для контраста */
+    background: #ffffff; /* Белый фон */
+    color: #1a1a1a; /* Темный текст для контраста */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -36,8 +36,8 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    background: linear-gradient(90deg, #722f37, #355e3b); /* Градиент бордовый-темно-зеленый */
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(90deg, #6b7280, #8b5cf6); /* Градиент от серого к фиолетовому */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     padding: 15px 20px;
     display: flex;
     justify-content: center;
@@ -48,23 +48,23 @@ body {
 
 .pets-link,
 .nutrition-link {
-    color: #f5f5f5; /* Светлый текст */
+    color: #ffffff; /* Белый текст */
     font-size: 1.2rem;
     font-weight: 500;
     text-transform: uppercase;
     padding: 10px 20px;
     border-radius: 8px;
-    background: rgba(114, 47, 55, 0.3); /* Полупрозрачный бордовый фон */
+    background: linear-gradient(45deg, #3b82f6, #10b981); /* Градиент синий-зеленый */
     transition: all 0.3s ease;
     text-decoration: none;
 }
 
 .pets-link:hover,
 .nutrition-link:hover {
-    background: rgba(114, 47, 55, 0.5); /* Ярче при наведении */
-    color: #e8b923; /* Золотистый при наведении */
+    background: linear-gradient(45deg, #2563eb, #059669); /* Более яркий градиент при наведении */
+    color: #ffffff;
     transform: translateY(-2px);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 @media (max-width: 768px) {
@@ -105,26 +105,33 @@ button {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    background: linear-gradient(135deg, #f3f4f6, #e5e7eb); /* Легкий серый градиент */
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Заголовок страницы */
 .page-title {
     text-align: center;
     font-size: 2rem;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 20px;
-    color: #f5f5f5; /* Светлый текст */
+    color: #1f2937; /* Темно-серый цвет заголовка */
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6); /* Градиент для текста */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 /* Форма */
 .form-container {
-    background: rgba(60, 47, 47, 0.9); /* Темно-бордовый фон */
-    border-radius: 8px;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    background: #ffffff; /* Белый фон формы */
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     padding: 20px;
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .input-group {
@@ -135,41 +142,41 @@ button {
     display: block;
     margin-bottom: 5px;
     font-weight: 500;
-    color: #f5f5f5; /* Светлый текст */
+    color: #1f2937; /* Темный текст */
 }
 
 .form-input {
     width: 100%;
-    padding: 15px;
-    border: none;
-    outline: none;
-    background: rgba(74, 112, 67, 0.3); /* Полупрозрачный темно-зеленый фон */
+    padding: 12px;
+    border: 1px solid #d1d5db; /* Светло-серая граница */
     border-radius: 8px;
     font-size: 1rem;
-    color: #f5f5f5; /* Светлый текст */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    color: #1a1a1a;
+    background: #f9fafb; /* Очень светлый фон */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .form-input:focus {
-    background: rgba(74, 112, 67, 0.5);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    border-color: #3b82f6; /* Синий контур при фокусе */
+    box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+    background: #ffffff;
 }
 
 .form-select {
     width: 100%;
-    padding: 15px;
-    border: none;
-    outline: none;
-    background: rgba(74, 112, 67, 0.3);
+    padding: 12px;
+    border: 1px solid #d1d5db;
     border-radius: 8px;
     font-size: 1rem;
-    color: #f5f5f5;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    color: #1a1a1a;
+    background: #f9fafb;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .form-select:focus {
-    background: rgba(74, 112, 67, 0.5);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    border-color: #3b82f6;
+    box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+    background: #ffffff;
 }
 
 .form-checkbox {
@@ -182,59 +189,60 @@ button {
 .form-checkbox input[type="checkbox"] {
     width: 20px;
     height: 20px;
-    accent-color: #e8b923; /* Золотистый цвет чекбокса */
+    accent-color: #8b5cf6; /* Фиолетовый чекбокс */
     cursor: pointer;
 }
 
 /* Кнопки */
 .btn-primary {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     border-radius: 8px;
     font-size: 1rem;
     font-weight: 600;
-    color: #f5f5f5;
-    background: #722f37; /* Бордовый цвет кнопки */
-    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6); /* Градиент синий-фиолетовый */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     text-decoration: none;
 }
 
 .btn-primary:hover {
+    background: linear-gradient(45deg, #2563eb, #7c3aed); /* Более яркий градиент */
     transform: translateY(-3px);
-    background: #355e3b; /* Темно-зеленый при наведении */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
 .btn-secondary {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     border-radius: 8px;
     font-size: 1rem;
     font-weight: 600;
-    color: #f5f5f5;
-    background: rgba(74, 112, 67, 0.3);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    color: #1f2937;
+    background: #e5e7eb; /* Светло-серый фон */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     text-align: center;
     text-decoration: none;
 }
 
 .btn-secondary:hover {
-    background: rgba(74, 112, 67, 0.5);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    background: #d1d5db;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* Ссылки */
 .jewelry-link,
 .orders-link {
     display: inline-block;
-    color: #f5f5f5;
+    color: #1f2937;
     font-size: 1.2rem;
     font-weight: 500;
     padding: 10px 20px;
     border-radius: 8px;
-    background: rgba(74, 112, 67, 0.3);
+    background: linear-gradient(45deg, #e5e7eb, #f3f4f6); /* Легкий градиент */
     transition: background-color 0.3s ease, transform 0.3s ease;
     text-decoration: none;
     margin: 5px;
@@ -242,7 +250,7 @@ button {
 
 .jewelry-link:hover,
 .orders-link:hover {
-    background: rgba(74, 112, 67, 0.5);
+    background: linear-gradient(45deg, #d1d5db, #e5e7eb);
     transform: scale(1.05);
 }
 
@@ -255,20 +263,20 @@ button {
 .vueapp-button {
     display: inline-block;
     padding: 10px 20px;
-    background: #722f37;
-    color: #f5f5f5;
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+    color: #ffffff;
     text-decoration: none;
     border-radius: 8px;
     font-weight: 600;
     text-transform: uppercase;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
 .vueapp-button:hover {
-    background: #355e3b;
+    background: linear-gradient(45deg, #2563eb, #7c3aed);
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* Контейнер кнопки VueApp */
@@ -284,19 +292,19 @@ button {
 .table-container {
     width: 100%;
     max-width: 1200px;
-    background: rgba(60, 47, 47, 0.9); /* Темно-бордовый фон */
-    border-radius: 16px;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    background: #ffffff; /* Белый фон */
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     padding: 20px;
     margin-bottom: 20px;
-    overflow-x: hidden;
+    overflow-x: auto;
 }
 
 .styled-table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-    border-radius: 16px;
+    border-radius: 12px;
     overflow: hidden;
     margin: 0 auto;
     table-layout: fixed;
@@ -304,19 +312,20 @@ button {
 
 .styled-table th,
 .styled-table td {
-    background: rgba(60, 47, 47, 0.9);
-    color: #f5f5f5;
-    padding: 10px;
+    background: #ffffff;
+    color: #1f2937;
+    padding: 12px;
     text-align: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid #e5e7eb;
+    border-right: 1px solid #e5e7eb;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .styled-table th {
-    background: rgba(74, 112, 67, 0.7); /* Темно-зеленый фон заголовков */
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6); /* Градиент для заголовков */
+    color: #ffffff;
     font-weight: 600;
 }
 
@@ -330,7 +339,7 @@ button {
 }
 
 .styled-table tbody tr:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: #f3f4f6; /* Легкий серый фон при наведении */
     cursor: pointer;
 }
 
@@ -338,82 +347,7 @@ button {
     text-align: center;
     font-size: 1.2rem;
     padding: 20px;
-    color: #f5f5f5;
-}
-
-/* Настройка ширины столбцов для таблицы клиентов */
-.clients-table th:nth-child(1),
-.clients-table td:nth-child(1) { /* ID */
-    width: 5%;
-    min-width: 50px;
-}
-
-.clients-table th:nth-child(2),
-.clients-table td:nth-child(2) { /* Имя */
-    width: 12%;
-    min-width: 100px;
-    white-space: normal;
-    word-break: break-word;
-}
-
-.clients-table th:nth-child(3),
-.clients-table td:nth-child(3) { /* Фамилия */
-    width: 12%;
-    min-width: 100px;
-    white-space: normal;
-    word-break: break-word;
-}
-
-.clients-table th:nth-child(4),
-.clients-table td:nth-child(4) { /* Телефон */
-    width: 12%;
-    min-width: 100px;
-    white-space: normal;
-    word-break: break-word;
-}
-
-.clients-table th:nth-child(5),
-.clients-table td:nth-child(5) { /* Email */
-    width: 15%;
-    min-width: 120px;
-    white-space: normal;
-    word-break: break-word;
-}
-
-.clients-table th:nth-child(6),
-.clients-table td:nth-child(6) { /* Адрес */
-    width: 15%;
-    min-width: 120px;
-    white-space: normal;
-    word-break: break-word;
-}
-
-.clients-table th:nth-child(7),
-.clients-table td:nth-child(7) { /* Заметки */
-    width: 15%;
-    min-width: 120px;
-    white-space: normal;
-    word-break: break-word;
-}
-
-.clients-table th:nth-child(8),
-.clients-table td:nth-child(8) { /* Предпочитаемый способ связи */
-    width: 12%;
-    min-width: 100px;
-    white-space: normal;
-    word-break: break-word;
-}
-
-.clients-table th:nth-child(9),
-.clients-table td:nth-child(9) { /* Фото */
-    width: 8%;
-    min-width: 80px;
-}
-
-.clients-table th:nth-child(10),
-.clients-table td:nth-child(10) { /* Действия */
-    width: 12%;
-    min-width: 100px;
+    color: #1f2937;
 }
 
 /* Настройка ширины столбцов для таблицы ремонтов */
@@ -425,14 +359,14 @@ button {
 
 .repairs-table th:nth-child(2),
 .repairs-table td:nth-child(2) { /* Имя клиента */
-    width: 12%;
+    width: 15%;
     min-width: 100px;
     white-space: normal;
     word-break: break-word;
 }
 
 .repairs-table th:nth-child(3),
-.repairs-table td:nth-child(3) { /* Тип холодильника */
+.repairs-table td:nth-child(3) { /* Тип монитора */
     width: 10%;
     min-width: 80px;
     white-space: normal;
@@ -493,8 +427,8 @@ button {
     border-radius: 8px;
     object-fit: cover;
     vertical-align: middle;
-    border: 2px solid #e8b923; /* Золотистая граница */
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    border: 2px solid #3b82f6; /* Синяя граница */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 /* Статусы */
@@ -503,15 +437,23 @@ button {
     padding: 5px 10px;
     border-radius: 5px;
     font-weight: 600;
-    color: #f5f5f5;
+    color: #ffffff;
 }
 
-.status.available {
-    background: #722f37; /* Бордовый для активных статусов */
+.status.accepted {
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6); /* Градиент для статуса Принят */
 }
 
-.status.unavailable {
-    background: #4a4a4a; /* Темно-серый для неактивных статусов */
+.status.in_progress {
+    background: linear-gradient(45deg, #10b981, #34d399); /* Зеленый градиент для В процессе */
+}
+
+.status.completed {
+    background: linear-gradient(45deg, #059669, #10b981); /* Темно-зеленый градиент для Завершен */
+}
+
+.status.canceled {
+    background: linear-gradient(45deg, #ef4444, #f87171); /* Красный градиент для Отменен */
 }
 
 /* Кнопки действий */
@@ -524,7 +466,7 @@ button {
 .action-btn {
     background: none;
     border: none;
-    color: #f5f5f5;
+    color: #1f2937;
     font-size: 1rem;
     cursor: pointer;
     transition: color 0.3s ease, transform 0.3s ease;
@@ -535,27 +477,27 @@ button {
 }
 
 .view-icon {
-    color: #f5f5f5;
+    color: #3b82f6;
 }
 
 .view-icon:hover {
-    color: #e8b923;
+    color: #2563eb;
 }
 
 .edit-icon {
-    color: #f5f5f5;
+    color: #10b981;
 }
 
 .edit-icon:hover {
-    color: #e8b923;
+    color: #059669;
 }
 
 .delete-icon {
-    color: #f5f5f5;
+    color: #ef4444;
 }
 
 .delete-icon:hover {
-    color: #722f37;
+    color: #dc2626;
 }
 
 /* Контейнер продукта */
@@ -582,41 +524,41 @@ button {
 }
 
 .pagination a {
-    background: #722f37;
-    color: #f5f5f5;
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+    color: #ffffff;
     font-weight: 600;
     padding: 10px 20px;
     border-radius: 8px;
     text-decoration: none;
     transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .pagination a.active {
-    background: #355e3b;
-    color: #f5f5f5;
+    background: linear-gradient(45deg, #2563eb, #7c3aed);
+    color: #ffffff;
 }
 
 .pagination a:hover:not(.active) {
-    background: #355e3b;
+    background: linear-gradient(45deg, #2563eb, #7c3aed);
     transform: scale(1.05);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
 .pagination .dots {
-    color: #f5f5f5;
+    color: #1f2937;
     pointer-events: none;
 }
 
 /* Стили для select */
 select.form-input {
-    background: rgba(74, 112, 67, 0.3);
-    color: #f5f5f5;
+    background: #f9fafb;
+    color: #1a1a1a;
 }
 
 option {
-    background: #3c2f2f;
-    color: #f5f5f5;
+    background: #ffffff;
+    color: #1a1a1a;
 }
 
 /* Анимация появления */
@@ -665,8 +607,6 @@ option {
         font-size: 0.9rem;
     }
 
-    .clients-table th,
-    .clients-table td,
     .repairs-table th,
     .repairs-table td {
         min-width: 60px;
@@ -680,5 +620,5 @@ option {
 
 /* Улучшенные тени */
 .shadow-2xl {
-    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }

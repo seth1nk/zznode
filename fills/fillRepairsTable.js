@@ -2,7 +2,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 const { faker } = require('@faker-js/faker/locale/ru');
 const path = require('path');
 const fs = require('fs');
-const sequelize = new Sequelize('postgresql://uhri6rljeutxcoo4ldel:QMnQBcOhZrQL3DXnw7vO75mBGRTvSV@bgejjcdl1op7xb2ptvdr-postgresql.services.clever-cloud.com:50013/bgejjcdl1op7xb2ptvdr', {
+const sequelize = new Sequelize('postgresql://u4rrszbkx3keaibopb8b:T8Bve2Nn3vuglwUJELnSHUPZHsboeD@bzkvgpndmdz37iek3wwg-postgresql.services.clever-cloud.com:50013/bzkvgpndmdz37iek3wwg', {
     dialect: 'postgres',
     logging: false,
     dialectOptions: {
@@ -13,7 +13,7 @@ const sequelize = new Sequelize('postgresql://uhri6rljeutxcoo4ldel:QMnQBcOhZrQL3
     },
 });
 const Repair = require('../models/Repair')(sequelize, DataTypes);
-const sampleImages = ['t1.png', 't2.png'];
+const sampleImages = ['a1.jpg', 'a2.jpg', 'a3.jpg', 'a4.jpg', 'a5.jpg', 'a6.jpg', 'a7.jpg'];
 
 async function fillRepairsTable(count) {
     try {
@@ -21,7 +21,7 @@ async function fillRepairsTable(count) {
         for (let i = 0; i < count; i++) {
             const repair = await Repair.create({
                 client_name: `${faker.person.firstName()} ${faker.person.lastName()}`,
-                type: faker.helpers.arrayElement(['однокамерный', 'двухкамерный', 'side-by-side', 'встраиваемый']),
+                type: faker.helpers.arrayElement(['LCD', 'LED', 'OLED', 'CRT']),
                 brand: faker.company.name(),
                 model: faker.vehicle.model(),
                 issue_description: faker.lorem.sentence(),

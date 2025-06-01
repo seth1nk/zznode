@@ -3,22 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Добавить ремонт</title>
+    <title>Добавить ремонт монитора</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <div id="content">
         <div class="app-container">
-            <h1 class="page-title">Добавить новый ремонт</h1>
+            <h1 class="page-title">Добавить новый ремонт монитора</h1>
             <form class="form-container" id="create-form" method="POST" enctype="multipart/form-data">
                 <div class="input-group">
                     <label for="client_name">Имя клиента:</label>
                     <input id="client_name" class="form-input" type="text" name="client_name" required>
                 </div>
                 <div class="input-group">
-                    <label for="type">Тип холодильника:</label>
-                    <input id="type" class="form-input" type="text" name="type" required>
+                    <label for="type">Тип монитора:</label>
+                    <select id="type" class="form-input" name="type" required>
+                        <option value="LCD">LCD</option>
+                        <option value="LED">LED</option>
+                        <option value="OLED">OLED</option>
+                        <option value="CRT">CRT</option>
+                    </select>
                 </div>
                 <div class="input-group">
                     <label for="brand">Бренд:</label>
